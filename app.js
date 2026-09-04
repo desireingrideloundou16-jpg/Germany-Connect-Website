@@ -506,22 +506,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (resultScoreNum) resultScoreNum.textContent = `${quizScore}/${quizQuestions.length}`;
 
-    let recLevel = 'Allemand Niveau A1 (65 000 FCFA)';
+    let recLevel = 'Allemand Niveau A1 (100 000 FCFA)';
     let title = 'Niveau Recommandé : Débutant A1';
     let desc = 'Vous débutez votre apprentissage de l\'allemand. Notre programme A1 intensif vous apportera des fondations solides en grammaire, phonétique et vocabulaire quotidien pour démarrer votre projet vers l\'Allemagne !';
 
     if (quizScore >= 2 && quizScore <= 3) {
-      recLevel = 'Allemand Niveau A2 (75 000 FCFA)';
+      recLevel = 'Allemand Niveau A2 (110 000 FCFA)';
       title = 'Niveau Recommandé : Élémentaire A2';
       desc = 'Vous avez déjà des notions élémentaires de la langue allemande. Le niveau A2 vous permettra de structurer vos phrases, d\'enrichir votre lexique et de converser avec plus d\'aisance.';
     } else if (quizScore >= 4 && quizScore <= 5) {
-      recLevel = 'Allemand Niveau B1 (85 000 FCFA)';
+      recLevel = 'Allemand Niveau B1 (130 000 FCFA)';
       title = 'Niveau Recommandé : Intermédiaire B1 Certifiant';
       desc = 'Bravo ! Vous avez d\'excellentes bases linguistiques. Vous êtes prêt(e) pour le niveau B1 afin de viser directement les certifications officielles Goethe ou TELC exigées pour les visas Ausbildung et universités.';
     } else if (quizScore === 6) {
-      recLevel = 'Allemand Niveau B2 (95 000 FCFA)';
+      recLevel = 'Allemand Niveau B2 (140 000 FCFA)';
       title = 'Niveau Recommandé : Avancé B2 Professionnel';
-      desc = 'Score parfait ! Votre maîtrise de l\'allemand est remarquable. Le niveau B2 vous ouvrira les opportunités médicales, d\'ingénierie et d\'études supérieures directes en Allemagne.';
+      desc = 'Score parfait ! Votre maîtrise de l\'allemand est remarquable. Le niveau B2 (ou C1 150 000 FCFA) vous ouvrira les opportunités médicales, d\'ingénierie et d\'études supérieures directes en Allemagne.';
     }
 
     if (resultLevelTitle) resultLevelTitle.textContent = title;
