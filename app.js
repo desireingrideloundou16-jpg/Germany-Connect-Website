@@ -1,688 +1,364 @@
 /**
- * GERMANY CONNECT INSTITUTE — MOTEUR D'INTERACTIONS JAVASCRIPT
- * Gestion du Bithème (Sombre / Clair), Artefacts Diagnostiques, Télémétrie Typewriter,
- * Simulateur de Budget Dynamique, Test de Niveau Interactif, Modales & Intégration WhatsApp.
+ * GERMANY CONNECT INSTITUTE — Interactions
+ * Thème clair/sombre, en-tête, menu mobile, onglets d'examens, filtres,
+ * simulateur de budget, test de niveau, modales et envoi WhatsApp.
  */
-
 document.addEventListener('DOMContentLoaded', () => {
+  const WA_NUMBER = '491749632778';
+  const root = document.documentElement;
 
-  // ==========================================================================
-  // 1. GESTION DU BITHÈME (MODE SOMBRE / MODE CLAIR)
-  // ==========================================================================
-  const themeToggleBtn = document.getElementById('themeToggleBtn');
-  const mobileThemeToggleBtn = document.getElementById('mobileThemeToggleBtn');
-  const htmlRoot = document.documentElement;
+  const store = {
+    get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+    set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+  };
 
-  function initTheme() {
-    const savedTheme = localStorage.getItem('gci_theme');
-    if (savedTheme) {
-      setTheme(savedTheme);
-    } else {
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      setTheme(prefersDark ? 'dark' : 'dark'); // Dark par défaut (Charte Allemande)
-    }
-  }
-
-  function setTheme(theme) {
-    htmlRoot.setAttribute('data-theme', theme);
-    localStorage.setItem('gci_theme', theme);
-  }
-
-  function toggleTheme() {
-    const currentTheme = htmlRoot.getAttribute('data-theme') || 'dark';
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    setTheme(newTheme);
-  }
-
-  if (themeToggleBtn) themeToggleBtn.addEventListener('click', toggleTheme);
-  if (mobileThemeToggleBtn) mobileThemeToggleBtn.addEventListener('click', toggleTheme);
-
-  initTheme();
-
-  // ==========================================================================
-  // 2. NAVIGATION FLOTTANTE & ESPION DE SCROLL (ACTIVE NAV)
-  // ==========================================================================
-  const navItems = document.querySelectorAll('.nav-item');
-  const sections = document.querySelectorAll('section[id]');
-
-  window.addEventListener('scroll', () => {
-    const scrollPosition = window.scrollY + 180;
-
-    sections.forEach(section => {
-      const sectionTop = section.offsetTop;
-      const sectionHeight = section.offsetHeight;
-      const sectionId = section.getAttribute('id');
-
-      if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-        navItems.forEach(item => {
-          item.classList.remove('active');
-          if (item.getAttribute('href') === `#${sectionId}`) {
-            item.classList.add('active');
-          }
-        });
-      }
+  // ---------- 1. Thème ----------
+  document.querySelectorAll('.theme-toggle').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      store.set('gci_theme', next);
     });
   });
 
-  // ==========================================================================
-  // 3. TIROIR DE NAVIGATION MOBILE
-  // ==========================================================================
-  const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-  const drawerCloseBtn = document.getElementById('drawerCloseBtn');
-  const mobileDrawer = document.getElementById('mobileDrawer');
-  const drawerBackdrop = document.getElementById('drawerBackdrop');
-  const drawerLinks = document.querySelectorAll('.drawer-link');
+  // ---------- 2. En-tête & lien actif ----------
+  const header = document.getElementById('siteHeader');
+  const onScroll = () => header && header.classList.toggle('is-scrolled', window.scrollY > 24);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  const navLinks = document.querySelectorAll('.nav-link');
+  if ('IntersectionObserver' in window) {
+    const spy = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const id = entry.target.id;
+        navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === `#${id}`));
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    document.querySelectorAll('main section[id]').forEach(s => spy.observe(s));
+  }
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---------- 2b. Mot qui change dans le titre ----------
+  const rotator = document.getElementById('heroRotator');
+  if (rotator && !reduceMotion) {
+    const words = Array.from(rotator.querySelectorAll('.rotator-word'));
+    let current = 0;
+    setInterval(() => {
+      const prev = words[current];
+      current = (current + 1) % words.length;
+      prev.classList.remove('is-current');
+      prev.classList.add('is-leaving');
+      words[current].classList.remove('is-leaving');
+      words[current].classList.add('is-current');
+      setTimeout(() => prev.classList.remove('is-leaving'), 700);
+    }, 2600);
+  }
+
+  // ---------- 2c. Apparition au défilement ----------
+  if ('IntersectionObserver' in window && !reduceMotion) {
+    const targets = document.querySelectorAll('.section-head, .pole, .compare-row, .step, .tariff-list, .sim-form, .receipt, .quiz-card, .campus-photos, .contact, .footer-cta');
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-in');
+        io.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    targets.forEach((el, i) => {
+      if (el.getBoundingClientRect().top < window.innerHeight) return; // déjà visible : on ne cache rien
+      el.classList.add('will-reveal');
+      const siblings = el.parentElement ? Array.from(el.parentElement.children) : [];
+      el.style.transitionDelay = `${Math.min(siblings.indexOf(el), 3) * 90}ms`;
+      io.observe(el);
+    });
+  }
+
+  // ---------- 3. Menu mobile ----------
+  const menuBtn = document.getElementById('mobileMenuBtn');
+  const drawer = document.getElementById('mobileDrawer');
+  const backdrop = document.getElementById('drawerBackdrop');
+  const closeBtn = document.getElementById('drawerCloseBtn');
 
   function openDrawer() {
-    if (mobileDrawer && drawerBackdrop) {
-      mobileDrawer.classList.add('is-open');
-      drawerBackdrop.classList.add('is-open');
-      mobileDrawer.setAttribute('aria-hidden', 'false');
-      document.body.style.overflow = 'hidden';
-    }
+    drawer.classList.add('is-open');
+    backdrop.classList.add('is-open');
+    drawer.setAttribute('aria-hidden', 'false');
+    menuBtn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
   }
-
   function closeDrawer() {
-    if (mobileDrawer && drawerBackdrop) {
-      mobileDrawer.classList.remove('is-open');
-      drawerBackdrop.classList.remove('is-open');
-      mobileDrawer.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-    }
+    if (!drawer.classList.contains('is-open')) return;
+    drawer.classList.remove('is-open');
+    backdrop.classList.remove('is-open');
+    drawer.setAttribute('aria-hidden', 'true');
+    menuBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
   }
+  menuBtn.addEventListener('click', openDrawer);
+  closeBtn.addEventListener('click', closeDrawer);
+  backdrop.addEventListener('click', closeDrawer);
+  drawer.querySelectorAll('.drawer-link, .open-enroll-modal').forEach(l => l.addEventListener('click', closeDrawer));
 
-  if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', openDrawer);
-  if (drawerCloseBtn) drawerCloseBtn.addEventListener('click', closeDrawer);
-  if (drawerBackdrop) drawerBackdrop.addEventListener('click', closeDrawer);
-
-  drawerLinks.forEach(link => {
-    link.addEventListener('click', closeDrawer);
-  });
-
-  // ==========================================================================
-  // 4. COMPTEURS NUMÉRIQUES ANIMÉS
-  // ==========================================================================
-  const counters = document.querySelectorAll('.counter-val');
-  let countersStarted = false;
-
-  function runCounters() {
-    counters.forEach(counter => {
-      const target = parseInt(counter.dataset.target, 10);
-      const duration = 1600;
-      const stepTime = 20;
-      const totalSteps = duration / stepTime;
-      const increment = target / totalSteps;
-      let current = 0;
-
-      const timer = setInterval(() => {
-        current += increment;
-        if (current >= target) {
-          counter.textContent = target;
-          clearInterval(timer);
-        } else {
-          counter.textContent = Math.floor(current);
-        }
-      }, stepTime);
+  // ---------- 4. Onglets d'examens ----------
+  const tabs = Array.from(document.querySelectorAll('.exam-tab'));
+  function selectTab(tab) {
+    tabs.forEach(t => {
+      const active = t === tab;
+      t.classList.toggle('is-active', active);
+      t.setAttribute('aria-selected', String(active));
+      t.tabIndex = active ? 0 : -1;
+      document.getElementById(t.getAttribute('aria-controls')).hidden = !active;
     });
   }
-
-  if ('IntersectionObserver' in window && counters.length > 0) {
-    const counterObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && !countersStarted) {
-          countersStarted = true;
-          runCounters();
-        }
-      });
-    }, { threshold: 0.2 });
-
-    const heroMetricsBar = document.querySelector('.hero-metrics-bar');
-    if (heroMetricsBar) counterObserver.observe(heroMetricsBar);
-  } else {
-    runCounters();
-  }
-
-  // ==========================================================================
-  // 5. ARTEFACT 1 : MÉLANGEUR DIAGNOSTIQUE D'EXAMENS (STACK ROTATIVE)
-  // ==========================================================================
-  const examSlides = document.querySelectorAll('.exam-card-slide');
-  const examDots = document.querySelectorAll('#examDeckDots .dot-item');
-  const btnExamNext = document.getElementById('btnExamNext');
-  const btnExamPrev = document.getElementById('btnExamPrev');
-  let currentExamIndex = 0;
-  let examAutoCycleTimer = null;
-
-  function updateExamDeck(index) {
-    const total = examSlides.length;
-    currentExamIndex = (index + total) % total;
-
-    examSlides.forEach((slide, i) => {
-      slide.classList.remove('is-front', 'is-middle', 'is-back');
-      if (i === currentExamIndex) {
-        slide.classList.add('is-front');
-      } else if (i === (currentExamIndex + 1) % total) {
-        slide.classList.add('is-middle');
-      } else {
-        slide.classList.add('is-back');
-      }
-    });
-
-    examDots.forEach((dot, i) => {
-      dot.classList.toggle('active', i === currentExamIndex);
-    });
-  }
-
-  function startExamAutoCycle() {
-    stopExamAutoCycle();
-    examAutoCycleTimer = setInterval(() => {
-      updateExamDeck(currentExamIndex + 1);
-    }, 4000);
-  }
-
-  function stopExamAutoCycle() {
-    if (examAutoCycleTimer) clearInterval(examAutoCycleTimer);
-  }
-
-  if (btnExamNext) {
-    btnExamNext.addEventListener('click', () => {
-      updateExamDeck(currentExamIndex + 1);
-      startExamAutoCycle();
-    });
-  }
-
-  if (btnExamPrev) {
-    btnExamPrev.addEventListener('click', () => {
-      updateExamDeck(currentExamIndex - 1);
-      startExamAutoCycle();
-    });
-  }
-
-  examDots.forEach(dot => {
-    dot.addEventListener('click', () => {
-      const idx = parseInt(dot.dataset.index, 10);
-      updateExamDeck(idx);
-      startExamAutoCycle();
+  tabs.forEach((tab, i) => {
+    tab.addEventListener('click', () => selectTab(tab));
+    tab.addEventListener('keydown', e => {
+      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+      const next = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+      selectTab(next);
+      next.focus();
     });
   });
 
-  const examDeck = document.getElementById('examDeck');
-  if (examDeck) {
-    examDeck.addEventListener('mouseenter', stopExamAutoCycle);
-    examDeck.addEventListener('mouseleave', startExamAutoCycle);
-  }
-
-  startExamAutoCycle();
-
-  // ==========================================================================
-  // 6. ARTEFACT 2 : TÉLÉMÉTRIE D'IMMERSION & TYPEWRITER STREAM
-  // ==========================================================================
-  const telemetryTimestamp = document.getElementById('telemetryTimestamp');
-  const typewriterTarget = document.getElementById('typewriterTarget');
-
-  function updateTelemetryClock() {
-    if (telemetryTimestamp) {
-      const now = new Date();
-      const hours = String(now.getHours()).padStart(2, '0');
-      const minutes = String(now.getMinutes()).padStart(2, '0');
-      const seconds = String(now.getSeconds()).padStart(2, '0');
-      telemetryTimestamp.textContent = `${hours}:${minutes}:${seconds} UTC+1`;
-    }
-  }
-
-  setInterval(updateTelemetryClock, 1000);
-  updateTelemetryClock();
-
-  const telemetryLogEntries = [
-    "> Suivi personnalisé : 25 laptops configurés pour simulations Goethe/TELC...",
-    "> Session B1 : Atelier d'expression orale en binômes (score moyen 94%)...",
-    "> Auto-École GCONNECT : 8 candidats en circulation double commande ce matin...",
-    "> Passerelle Allemagne : 4 dossiers de visa Ausbildung validés cette semaine...",
-    "> Laboratoire Audio : Entraînement phonétique et compréhension orale B2..."
-  ];
-
-  let logIndex = 0;
-  let charIndex = 0;
-  let isDeleting = false;
-
-  function typeTelemetryText() {
-    if (!typewriterTarget) return;
-
-    const currentText = telemetryLogEntries[logIndex];
-
-    if (!isDeleting) {
-      typewriterTarget.textContent = currentText.substring(0, charIndex + 1);
-      charIndex++;
-
-      if (charIndex === currentText.length) {
-        isDeleting = true;
-        setTimeout(typeTelemetryText, 2500);
-        return;
-      }
-    } else {
-      typewriterTarget.textContent = currentText.substring(0, charIndex - 1);
-      charIndex--;
-
-      if (charIndex === 0) {
-        isDeleting = false;
-        logIndex = (logIndex + 1) % telemetryLogEntries.length;
-      }
-    }
-
-    const speed = isDeleting ? 25 : 45;
-    setTimeout(typeTelemetryText, speed);
-  }
-
-  typeTelemetryText();
-
-  // ==========================================================================
-  // 7. FILTRES DU CATALOGUE DES FORMATIONS
-  // ==========================================================================
+  // ---------- 5. Filtres des formations ----------
   const filterTabs = document.querySelectorAll('.filter-tab');
-  const courseCards = document.querySelectorAll('.course-card-item');
-
+  const courses = document.querySelectorAll('.course');
   filterTabs.forEach(tab => {
     tab.addEventListener('click', () => {
-      filterTabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-
-      const filter = tab.dataset.filter;
-
-      courseCards.forEach(card => {
-        if (filter === 'all' || card.dataset.category === filter) {
-          card.style.display = 'flex';
-          card.style.opacity = '1';
-        } else {
-          card.style.display = 'none';
-          card.style.opacity = '0';
-        }
-      });
+      filterTabs.forEach(t => { t.classList.toggle('active', t === tab); t.setAttribute('aria-pressed', String(t === tab)); });
+      const f = tab.dataset.filter;
+      courses.forEach(c => { c.hidden = !(f === 'all' || c.dataset.category === f); });
     });
   });
 
-  // ==========================================================================
-  // 8. SIMULATEUR DE BUDGET DYNAMIQUE & EXPORT WHATSAPP
-  // ==========================================================================
-  const levelCheckboxes = document.querySelectorAll('input[name="simLevel"]');
-  const drivingRadios = document.querySelectorAll('input[name="simDriving"]');
-  const simVisaSelect = document.getElementById('simVisaSelect');
+  // ---------- 6. Simulateur ----------
+  const levelBoxes = document.querySelectorAll('input[name="simLevel"]');
+  const driveRadios = document.querySelectorAll('input[name="simDriving"]');
+  const visaSelect = document.getElementById('simVisaSelect');
+  const out = {
+    lang: document.getElementById('sumLangVal'),
+    drive: document.getElementById('sumDriveVal'),
+    visa: document.getElementById('sumVisaVal'),
+    total: document.getElementById('simTotalAmount')
+  };
+  const sim = { levels: [], driving: 'Non', visa: 'Aucun', total: 0 };
+  const fmt = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' FCFA';
 
-  const sumLangVal = document.getElementById('sumLangVal');
-  const sumDriveVal = document.getElementById('sumDriveVal');
-  const sumVisaVal = document.getElementById('sumVisaVal');
-  const simTotalAmount = document.getElementById('simTotalAmount');
-  const btnSendSimToWhatsApp = document.getElementById('btnSendSimToWhatsApp');
+  function recalc() {
+    let lang = 0;
+    sim.levels = [];
+    levelBoxes.forEach(cb => {
+      if (!cb.checked) return;
+      lang += parseInt(cb.value, 10);
+      sim.levels.push(cb.closest('.choice').querySelector('.choice-title').textContent.trim());
+    });
+    let drive = 0;
+    driveRadios.forEach(r => { if (r.checked) drive = parseInt(r.value, 10); });
+    sim.driving = drive > 0 ? 'Permis B double commande (70 000 FCFA)' : 'Non';
+    const visa = parseInt(visaSelect.value, 10);
+    sim.visa = visaSelect.options[visaSelect.selectedIndex].text;
+    sim.total = lang + drive + visa;
 
-  function formatPrice(amount) {
-    return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' FCFA';
+    out.lang.textContent = fmt(lang);
+    out.drive.textContent = fmt(drive);
+    out.visa.textContent = fmt(visa);
+    out.total.textContent = fmt(sim.total);
+  }
+  levelBoxes.forEach(cb => cb.addEventListener('change', recalc));
+  driveRadios.forEach(r => r.addEventListener('change', recalc));
+  visaSelect.addEventListener('change', recalc);
+  recalc();
+
+  function openWhatsApp(text) {
+    window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
   }
 
-  function recalculateSimulator() {
-    let langTotal = 0;
-    const selectedLevels = [];
+  document.getElementById('btnSendSimToWhatsApp').addEventListener('click', () => {
+    openWhatsApp(
+      `*DEVIS — GERMANY CONNECT INSTITUTE*\n` +
+      `*Niveaux de langue :* ${sim.levels.join(' + ') || 'Aucun'}\n` +
+      `*Auto-École GCONNECT :* ${sim.driving}\n` +
+      `*Accompagnement visa :* ${sim.visa}\n` +
+      `*Total estimé :* ${fmt(sim.total)}\n\n` +
+      `Bonjour, je souhaite réserver ma place pour ce parcours et convenir d'un rendez-vous au campus de Ngousso.`
+    );
+  });
 
-    levelCheckboxes.forEach(cb => {
-      if (cb.checked) {
-        langTotal += parseInt(cb.value, 10);
-        const label = cb.closest('.sim-check-card').querySelector('.check-title').textContent.trim();
-        selectedLevels.push(label);
-      }
-    });
-
-    let drivingTotal = 0;
-    let drivingLabel = 'Non';
-    drivingRadios.forEach(rb => {
-      if (rb.checked) {
-        drivingTotal = parseInt(rb.value, 10);
-        if (drivingTotal > 0) drivingLabel = 'Permis B Double Commande (70 000 FCFA)';
-      }
-    });
-
-    let visaTotal = 0;
-    let visaLabel = 'Aucun';
-    if (simVisaSelect) {
-      visaTotal = parseInt(simVisaSelect.value, 10);
-      visaLabel = simVisaSelect.options[simVisaSelect.selectedIndex].text;
-    }
-
-    const grandTotal = langTotal + drivingTotal + visaTotal;
-
-    if (sumLangVal) sumLangVal.textContent = formatPrice(langTotal);
-    if (sumDriveVal) sumDriveVal.textContent = formatPrice(drivingTotal);
-    if (sumVisaVal) sumVisaVal.textContent = formatPrice(visaTotal);
-    if (simTotalAmount) simTotalAmount.textContent = formatPrice(grandTotal);
-
-    // Stockage pour le bouton WhatsApp
-    if (btnSendSimToWhatsApp) {
-      btnSendSimToWhatsApp.dataset.levels = selectedLevels.join(' + ') || 'Aucun';
-      btnSendSimToWhatsApp.dataset.driving = drivingLabel;
-      btnSendSimToWhatsApp.dataset.visa = visaLabel;
-      btnSendSimToWhatsApp.dataset.total = formatPrice(grandTotal);
-    }
-  }
-
-  levelCheckboxes.forEach(cb => cb.addEventListener('change', recalculateSimulator));
-  drivingRadios.forEach(rb => rb.addEventListener('change', recalculateSimulator));
-  if (simVisaSelect) simVisaSelect.addEventListener('change', recalculateSimulator);
-
-  recalculateSimulator();
-
-  if (btnSendSimToWhatsApp) {
-    btnSendSimToWhatsApp.addEventListener('click', () => {
-      const levels = btnSendSimToWhatsApp.dataset.levels || 'Non spécifié';
-      const driving = btnSendSimToWhatsApp.dataset.driving || 'Non';
-      const visa = btnSendSimToWhatsApp.dataset.visa || 'Non';
-      const total = btnSendSimToWhatsApp.dataset.total || '0 FCFA';
-
-      const message = `*DEVIS PROJET GERMANY CONNECT INSTITUTE*\n` +
-        `-----------------------------------------\n` +
-        `*Niveaux de Langue :* ${levels}\n` +
-        `*Auto-École GCONNECT :* ${driving}\n` +
-        `*Accompagnement Visa :* ${visa}\n` +
-        `*Total Estimé :* ${total}\n` +
-        `-----------------------------------------\n` +
-        `Bonjour, je souhaite réserver ma place pour ce parcours et convenir d'un rendez-vous au campus de Ngousso.`;
-
-      const encodedUrl = `https://wa.me/491749632778?text=${encodeURIComponent(message)}`;
-      window.open(encodedUrl, '_blank');
-    });
-  }
-
-  // ==========================================================================
-  // 9. TEST DE NIVEAU EXPRESS D'ALLEMAND INTERACTIF
-  // ==========================================================================
-  const quizQuestions = [
-    {
-      question: '1. Complétez la phrase : "Guten Tag, wie ______ Sie ?"',
-      diff: 'Niveau : Débutant A1',
-      options: [
-        { text: 'A) heißt', correct: false },
-        { text: 'B) heißen', correct: true },
-        { text: 'C) heiße', correct: false },
-        { text: 'D) bist', correct: false }
-      ]
-    },
-    {
-      question: '2. Choisissez l\'article défini approprié : "______ Tisch ist sehr modern."',
-      diff: 'Niveau : Débutant A1',
-      options: [
-        { text: 'A) Das', correct: false },
-        { text: 'B) Die', correct: false },
-        { text: 'C) Der', correct: true },
-        { text: 'D) Den', correct: false }
-      ]
-    },
-    {
-      question: '3. Quelle est la phrase correcte avec le verbe modal "können" au présent ?',
-      diff: 'Niveau : Élémentaire A2',
-      options: [
-        { text: 'A) Er kann gut Deutsch sprechen.', correct: true },
-        { text: 'B) Er konnt gut Deutsch sprechen.', correct: false },
-        { text: 'C) Er kann sprechen gut Deutsch.', correct: false },
-        { text: 'D) Er spricht können Deutsch gut.', correct: false }
-      ]
-    },
-    {
-      question: '4. Complétez avec la préposition temporelle : "Der Unterricht beginnt ______ 8 Uhr."',
-      diff: 'Niveau : Élémentaire A2',
-      options: [
-        { text: 'A) am', correct: false },
-        { text: 'B) im', correct: false },
-        { text: 'C) um', correct: true },
-        { text: 'D) von', correct: false }
-      ]
-    },
-    {
-      question: '5. Complétez la subordonnée : "Ich lerne Deutsch, ______ ich in Deutschland eine Ausbildung machen will."',
-      diff: 'Niveau : Intermédiaire B1',
-      options: [
-        { text: 'A) denn', correct: false },
-        { text: 'B) weil', correct: true },
-        { text: 'C) obwohl', correct: false },
-        { text: 'D) dass', correct: false }
-      ]
-    },
-    {
-      question: '6. Quelle forme au subjonctif II exprime un souhait poli ? "______ Sie mir bitte helfen ?"',
-      diff: 'Niveau : Avancé B2',
-      options: [
-        { text: 'A) Könnten', correct: true },
-        { text: 'B) Haben', correct: false },
-        { text: 'C) Werden', correct: false },
-        { text: 'D) Müssten', correct: false }
-      ]
-    }
+  // ---------- 7. Test de niveau ----------
+  const questions = [
+    { q: 'Complétez : « Guten Tag, wie ______ Sie ? »', diff: 'Débutant A1', opts: ['heißt', 'heißen', 'heiße', 'bist'], a: 1 },
+    { q: 'Choisissez l\'article : « ______ Tisch ist sehr modern. »', diff: 'Débutant A1', opts: ['Das', 'Die', 'Der', 'Den'], a: 2 },
+    { q: 'Quelle phrase est correcte avec « können » au présent ?', diff: 'Élémentaire A2', opts: ['Er kann gut Deutsch sprechen.', 'Er konnt gut Deutsch sprechen.', 'Er kann sprechen gut Deutsch.', 'Er spricht können Deutsch gut.'], a: 0 },
+    { q: 'Complétez : « Der Unterricht beginnt ______ 8 Uhr. »', diff: 'Élémentaire A2', opts: ['am', 'im', 'um', 'von'], a: 2 },
+    { q: 'Complétez : « Ich lerne Deutsch, ______ ich in Deutschland eine Ausbildung machen will. »', diff: 'Intermédiaire B1', opts: ['denn', 'weil', 'obwohl', 'dass'], a: 1 },
+    { q: 'Quelle forme exprime une demande polie ? « ______ Sie mir bitte helfen ? »', diff: 'Avancé B2', opts: ['Könnten', 'Haben', 'Werden', 'Müssten'], a: 0 }
+  ];
+  const results = [
+    { min: 0, course: 'Allemand Niveau A1 (100 000 FCFA)', title: 'Niveau recommandé : Débutant A1', text: 'Vous débutez en allemand. Le programme A1 intensif vous donnera des bases solides en grammaire, prononciation et vocabulaire du quotidien pour lancer votre projet.' },
+    { min: 2, course: 'Allemand Niveau A2 (110 000 FCFA)', title: 'Niveau recommandé : Élémentaire A2', text: 'Vous avez déjà des notions. Le niveau A2 vous aidera à structurer vos phrases, enrichir votre vocabulaire et converser avec plus d\'aisance.' },
+    { min: 4, course: 'Allemand Niveau B1 (130 000 FCFA)', title: 'Niveau recommandé : Intermédiaire B1', text: 'Très bonnes bases ! Vous êtes prêt(e) pour le B1, le niveau exigé par les certifications Goethe ou TELC pour les visas Ausbildung et les universités.' },
+    { min: 6, course: 'Allemand Niveau B2 (140 000 FCFA)', title: 'Niveau recommandé : Avancé B2', text: 'Score parfait ! Le niveau B2 (ou C1) vous ouvre les professions médicales, l\'ingénierie et les études supérieures en Allemagne.' }
   ];
 
-  let currentQuizStep = 0;
-  let quizScore = 0;
+  let step = 0, score = 0;
+  const el = {
+    label: document.getElementById('quizStepLabel'),
+    diff: document.getElementById('quizDiffTag'),
+    question: document.getElementById('quizQuestionText'),
+    options: document.getElementById('quizOptionsList'),
+    bar: document.getElementById('quizProgressIndicator'),
+    content: document.getElementById('quizContentArea'),
+    result: document.getElementById('quizResultArea'),
+    score: document.getElementById('resultScoreNum'),
+    rTitle: document.getElementById('resultLevelTitle'),
+    rText: document.getElementById('resultLevelDesc'),
+    enroll: document.getElementById('btnEnrollWithQuizResult'),
+    restart: document.getElementById('btnRestartQuiz')
+  };
 
-  const quizStepLabel = document.getElementById('quizStepLabel');
-  const quizDiffTag = document.getElementById('quizDiffTag');
-  const quizQuestionText = document.getElementById('quizQuestionText');
-  const quizOptionsList = document.getElementById('quizOptionsList');
-  const quizProgressIndicator = document.getElementById('quizProgressIndicator');
-  const quizContentArea = document.getElementById('quizContentArea');
-  const quizResultArea = document.getElementById('quizResultArea');
-  const resultScoreNum = document.getElementById('resultScoreNum');
-  const resultLevelTitle = document.getElementById('resultLevelTitle');
-  const resultLevelDesc = document.getElementById('resultLevelDesc');
-  const btnRestartQuiz = document.getElementById('btnRestartQuiz');
-  const btnEnrollWithQuizResult = document.getElementById('btnEnrollWithQuizResult');
-
-  function renderQuizQuestion() {
-    if (currentQuizStep >= quizQuestions.length) {
-      showQuizResults();
-      return;
-    }
-
-    const q = quizQuestions[currentQuizStep];
-    if (quizStepLabel) quizStepLabel.textContent = `Question ${currentQuizStep + 1} sur ${quizQuestions.length}`;
-    if (quizDiffTag) quizDiffTag.textContent = q.diff;
-    if (quizQuestionText) quizQuestionText.textContent = q.question;
-
-    const progressPct = ((currentQuizStep + 1) / quizQuestions.length) * 100;
-    if (quizProgressIndicator) quizProgressIndicator.style.width = `${progressPct}%`;
-
-    if (quizOptionsList) {
-      quizOptionsList.innerHTML = '';
-      q.options.forEach((opt, idx) => {
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'quiz-opt-btn';
-        btn.textContent = opt.text;
-        btn.addEventListener('click', () => {
-          if (opt.correct) quizScore++;
-          currentQuizStep++;
-          renderQuizQuestion();
-        });
-        quizOptionsList.appendChild(btn);
-      });
-    }
+  function renderQuestion(focus) {
+    if (step >= questions.length) return showResult();
+    const item = questions[step];
+    el.label.textContent = `Question ${step + 1} sur ${questions.length}`;
+    el.diff.textContent = item.diff;
+    el.question.textContent = item.q;
+    el.bar.style.width = `${((step + 1) / questions.length) * 100}%`;
+    el.options.innerHTML = '';
+    el.options.classList.remove('is-locked');
+    item.opts.forEach((text, i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'quiz-opt';
+      b.innerHTML = `<span class="quiz-opt-key">${'ABCD'[i]}</span><span></span>`;
+      b.lastChild.textContent = text;
+      b.addEventListener('click', () => answer(i, b));
+      el.options.appendChild(b);
+    });
+    if (focus) el.question.focus({ preventScroll: true });
   }
 
-  function showQuizResults() {
-    if (quizContentArea) quizContentArea.style.display = 'none';
-    if (quizResultArea) quizResultArea.style.display = 'flex';
-
-    if (resultScoreNum) resultScoreNum.textContent = `${quizScore}/${quizQuestions.length}`;
-
-    let recLevel = 'Allemand Niveau A1 (100 000 FCFA)';
-    let title = 'Niveau Recommandé : Débutant A1';
-    let desc = 'Vous débutez votre apprentissage de l\'allemand. Notre programme A1 intensif vous apportera des fondations solides en grammaire, phonétique et vocabulaire quotidien pour démarrer votre projet vers l\'Allemagne !';
-
-    if (quizScore >= 2 && quizScore <= 3) {
-      recLevel = 'Allemand Niveau A2 (110 000 FCFA)';
-      title = 'Niveau Recommandé : Élémentaire A2';
-      desc = 'Vous avez déjà des notions élémentaires de la langue allemande. Le niveau A2 vous permettra de structurer vos phrases, d\'enrichir votre lexique et de converser avec plus d\'aisance.';
-    } else if (quizScore >= 4 && quizScore <= 5) {
-      recLevel = 'Allemand Niveau B1 (130 000 FCFA)';
-      title = 'Niveau Recommandé : Intermédiaire B1 Certifiant';
-      desc = 'Bravo ! Vous avez d\'excellentes bases linguistiques. Vous êtes prêt(e) pour le niveau B1 afin de viser directement les certifications officielles Goethe ou TELC exigées pour les visas Ausbildung et universités.';
-    } else if (quizScore === 6) {
-      recLevel = 'Allemand Niveau B2 (140 000 FCFA)';
-      title = 'Niveau Recommandé : Avancé B2 Professionnel';
-      desc = 'Score parfait ! Votre maîtrise de l\'allemand est remarquable. Le niveau B2 (ou C1 150 000 FCFA) vous ouvrira les opportunités médicales, d\'ingénierie et d\'études supérieures directes en Allemagne.';
+  function answer(i, btn) {
+    const item = questions[step];
+    el.options.classList.add('is-locked');
+    if (i === item.a) { score++; btn.classList.add('is-correct'); }
+    else {
+      btn.classList.add('is-wrong');
+      el.options.children[item.a].classList.add('is-correct');
     }
-
-    if (resultLevelTitle) resultLevelTitle.textContent = title;
-    if (resultLevelDesc) resultLevelDesc.textContent = desc;
-
-    if (btnEnrollWithQuizResult) {
-      btnEnrollWithQuizResult.setAttribute('data-course', recLevel);
-    }
+    setTimeout(() => { step++; renderQuestion(true); }, 650);
   }
 
-  function restartQuiz() {
-    currentQuizStep = 0;
-    quizScore = 0;
-    if (quizContentArea) quizContentArea.style.display = 'block';
-    if (quizResultArea) quizResultArea.style.display = 'none';
-    renderQuizQuestion();
+  function showResult() {
+    el.content.hidden = true;
+    el.result.hidden = false;
+    el.bar.style.width = '100%';
+    el.label.textContent = 'Résultat';
+    el.diff.textContent = '';
+    const r = results.filter(x => score >= x.min).pop();
+    el.score.textContent = `${score}/${questions.length}`;
+    el.rTitle.textContent = r.title;
+    el.rText.textContent = r.text;
+    el.enroll.dataset.course = r.course;
+    el.rTitle.focus({ preventScroll: true });
   }
 
-  if (btnRestartQuiz) btnRestartQuiz.addEventListener('click', restartQuiz);
+  el.restart.addEventListener('click', () => {
+    step = 0; score = 0;
+    el.content.hidden = false;
+    el.result.hidden = true;
+    renderQuestion(true);
+  });
+  renderQuestion(false);
 
-  renderQuizQuestion();
-
-  // ==========================================================================
-  // 10. GESTION DES MODALES ACCESSIBLES (INSCRIPTION, BROCHURE, CGU, PRIVACY)
-  // ==========================================================================
-  const allModals = document.querySelectorAll('.modal-backdrop');
-  const enrollModal = document.getElementById('enrollModal');
-  const brochureModal = document.getElementById('brochureModal');
-  const cguModal = document.getElementById('cguModal');
-  const privacyModal = document.getElementById('privacyModal');
-  const enrollProgramSelect = document.getElementById('enrollProgram');
+  // ---------- 8. Modales ----------
+  const programSelect = document.getElementById('enrollProgram');
+  let lastFocus = null;
 
   function openModal(modal) {
     if (!modal) return;
+    lastFocus = document.activeElement;
     modal.classList.add('is-active');
     modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
+    const first = modal.querySelector('input, select, textarea, button');
+    setTimeout(() => first && first.focus(), 60);
   }
-
   function closeModal(modal) {
-    if (!modal) return;
+    if (!modal || !modal.classList.contains('is-active')) return;
     modal.classList.remove('is-active');
     modal.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+    if (lastFocus) lastFocus.focus();
   }
 
-  function closeAllModals() {
-    allModals.forEach(modal => closeModal(modal));
-  }
-
-  // Déclencheurs Inscription
   document.querySelectorAll('.open-enroll-modal').forEach(btn => {
     btn.addEventListener('click', () => {
-      const courseName = btn.getAttribute('data-course');
-      if (enrollProgramSelect && courseName) {
-        let matched = false;
-        Array.from(enrollProgramSelect.options).forEach(opt => {
-          if (opt.value.toLowerCase().includes(courseName.toLowerCase()) || courseName.toLowerCase().includes(opt.value.toLowerCase())) {
-            enrollProgramSelect.value = opt.value;
-            matched = true;
-          }
-        });
-        if (!matched && courseName) {
-          // Si pas de correspondance exacte, sélectionner la consultation ou première option
-          enrollProgramSelect.selectedIndex = 0;
-        }
+      const course = btn.dataset.course;
+      if (course) {
+        const match = Array.from(programSelect.options).find(o => o.value === course);
+        programSelect.value = match ? match.value : programSelect.options[0].value;
       }
-      openModal(enrollModal);
+      openModal(document.getElementById('enrollModal'));
     });
   });
+  document.querySelectorAll('.open-brochure-modal').forEach(b => b.addEventListener('click', () => openModal(document.getElementById('brochureModal'))));
+  document.querySelectorAll('.open-cgu-modal').forEach(b => b.addEventListener('click', () => openModal(document.getElementById('cguModal'))));
+  document.querySelectorAll('.open-privacy-modal').forEach(b => b.addEventListener('click', () => openModal(document.getElementById('privacyModal'))));
+  document.querySelectorAll('[data-close-modal]').forEach(b => b.addEventListener('click', () => closeModal(b.closest('.modal'))));
+  document.querySelectorAll('.modal').forEach(m => m.addEventListener('click', e => { if (e.target === m) closeModal(m); }));
 
-  // Déclencheurs Brochure
-  document.querySelectorAll('.open-brochure-modal').forEach(btn => {
-    btn.addEventListener('click', () => openModal(brochureModal));
+  window.addEventListener('keydown', e => {
+    if (e.key !== 'Escape') return;
+    document.querySelectorAll('.modal.is-active').forEach(closeModal);
+    closeDrawer();
   });
 
-  // Déclencheurs Juridiques
-  document.querySelectorAll('.open-cgu-modal').forEach(btn => {
-    btn.addEventListener('click', () => openModal(cguModal));
+  // ---------- 9. Formulaires → WhatsApp ----------
+  document.getElementById('enrollForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const v = id => document.getElementById(id).value.trim();
+    openWhatsApp(
+      `*INSCRIPTION — GERMANY CONNECT INSTITUTE*\n` +
+      `*Nom et prénom :* ${v('enrollFullName')}\n` +
+      `*Téléphone / WhatsApp :* ${v('enrollPhone')}\n` +
+      `*Email :* ${v('enrollEmail') || 'Non renseigné'}\n` +
+      `*Programme :* ${v('enrollProgram')}\n` +
+      `*Créneau :* ${v('enrollSchedule')}\n` +
+      `*Projet :* ${v('enrollMessage') || 'Aucune précision'}\n\n` +
+      `Bonjour, je souhaite m'inscrire et être recontacté(e) pour finaliser mon dossier.`
+    );
+    closeModal(document.getElementById('enrollModal'));
+    e.target.reset();
   });
 
-  document.querySelectorAll('.open-privacy-modal').forEach(btn => {
-    btn.addEventListener('click', () => openModal(privacyModal));
+  document.getElementById('brochureForm').addEventListener('submit', e => {
+    e.preventDefault();
+    openWhatsApp(
+      `*DEMANDE DE BROCHURE 2026*\n` +
+      `*Nom :* ${document.getElementById('brochureName').value.trim()}\n` +
+      `*WhatsApp :* ${document.getElementById('brochureWhatsapp').value.trim()}\n\n` +
+      `Bonjour Germany Connect Institute, je souhaite recevoir le catalogue des formations et tarifs 2026 en PDF.`
+    );
+    closeModal(document.getElementById('brochureModal'));
+    e.target.reset();
   });
 
-  // Boutons de fermeture
-  document.querySelectorAll('[data-close-modal]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const modal = btn.closest('.modal-backdrop');
-      closeModal(modal);
+  // ---------- 10. Vidéo de présentation ----------
+  // preload="none" : la vidéo (≈ 9,5 Mo) n'est téléchargée qu'au clic, pour ménager les forfaits mobiles.
+  const promoVideo = document.getElementById('promoVideo');
+  const promoPlay = document.getElementById('promoPlay');
+  if (promoVideo && promoPlay) {
+    const figure = promoVideo.closest('.promo-video');
+    promoPlay.addEventListener('click', () => {
+      figure.classList.add('is-playing');
+      const p = promoVideo.play();
+      if (p && p.catch) p.catch(() => {});
+      promoVideo.focus({preventScroll: true});
     });
-  });
-
-  // Fermeture par clic backdrop
-  allModals.forEach(modal => {
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        closeModal(modal);
-      }
-    });
-  });
-
-  // Fermeture par touche Échap
-  window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      closeAllModals();
-      closeDrawer();
-    }
-  });
-
-  // ==========================================================================
-  // 11. SOUMISSION DES FORMULAIRES & TRANSMISSION WHATSAPP
-  // ==========================================================================
-  const enrollForm = document.getElementById('enrollForm');
-  if (enrollForm) {
-    enrollForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-
-      const name = document.getElementById('enrollFullName').value.trim();
-      const phone = document.getElementById('enrollPhone').value.trim();
-      const email = document.getElementById('enrollEmail').value.trim() || 'Non renseigné';
-      const program = document.getElementById('enrollProgram').value;
-      const schedule = document.getElementById('enrollSchedule').value;
-      const message = document.getElementById('enrollMessage').value.trim() || 'Aucune précision';
-
-      const waText = `*NOUVELLE INSCRIPTION // GERMANY CONNECT INSTITUTE*\n` +
-        `-----------------------------------------\n` +
-        `*Nom & Prénom :* ${name}\n` +
-        `*Téléphone / WhatsApp :* ${phone}\n` +
-        `*Email :* ${email}\n` +
-        `*Programme :* ${program}\n` +
-        `*Créneau :* ${schedule}\n` +
-        `*Détails du projet :* ${message}\n` +
-        `-----------------------------------------\n` +
-        `Bonjour, je confirme mon souhait d'inscription et souhaite être recontacté(e) pour finaliser mon dossier.`;
-
-      closeModal(enrollModal);
-      const waUrl = `https://wa.me/491749632778?text=${encodeURIComponent(waText)}`;
-      window.open(waUrl, '_blank');
-      enrollForm.reset();
-    });
+    promoVideo.addEventListener('play', () => figure.classList.add('is-playing'));
   }
-
-  const brochureForm = document.getElementById('brochureForm');
-  if (brochureForm) {
-    brochureForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const bName = document.getElementById('brochureName').value.trim();
-      const bPhone = document.getElementById('brochureWhatsapp').value.trim();
-
-      const waText = `*DEMANDE DE BROCHURE OFFICIELLE 2026*\n` +
-        `-----------------------------------------\n` +
-        `*Nom :* ${bName}\n` +
-        `*WhatsApp :* ${bPhone}\n` +
-        `Bonjour Germany Connect Institute, je souhaite recevoir le catalogue complet des formations et tarifs 2026 en PDF.`;
-
-      closeModal(brochureModal);
-      const waUrl = `https://wa.me/491749632778?text=${encodeURIComponent(waText)}`;
-      window.open(waUrl, '_blank');
-      brochureForm.reset();
-    });
-  }
-
 });

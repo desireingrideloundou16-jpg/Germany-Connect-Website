@@ -1,1278 +1,844 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="dark">
+<html lang="fr" data-theme="light">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>GERMANY CONNECT INSTITUTE | Centre Linguistique d'Allemand, Auto-École GCONNECT & Passerelle Allemagne</title>
-  
-  <!-- SEO & Social Meta Tags -->
-  <meta name="description" content="Centre d'excellence linguistique d'allemand A1 à C1 à Yaoundé (98% de réussite Goethe/TELC/ÖSD), Auto-École GCONNECT intégrée et accompagnement complet pour vos visas, études et contrats d'Ausbildung en Allemagne.">
-  <meta name="keywords" content="Germany Connect Institute, cours allemand Yaoundé, Auto école GCONNECT, Goethe Zertifikat, TELC Deutsch, ÖSD, visa Allemagne Cameroun, Ausbildung Allemagne, études Allemagne Ngousso">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Germany Connect Institute — Cours d'allemand, Auto-École & Passerelle Allemagne à Yaoundé</title>
+
+  <meta name="description" content="Cours d'allemand A1 à C1 à Yaoundé (Carrefour Ngousso), préparation Goethe, TELC et ÖSD, Auto-École GCONNECT intégrée et accompagnement visa, études et Ausbildung en Allemagne.">
+  <meta name="keywords" content="Germany Connect Institute, cours allemand Yaoundé, Auto école GCONNECT, Goethe Zertifikat, TELC Deutsch, ÖSD, visa Allemagne Cameroun, Ausbildung Allemagne, Ngousso">
   <meta name="author" content="Germany Connect Institute">
   <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#0D0E12">
+  <meta name="theme-color" content="#F7F3EC" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#121215" media="(prefers-color-scheme: dark)">
 
-  <!-- Open Graph / Meta Réseaux -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="GERMANY CONNECT INSTITUTE — Institut Linguistique & Passerelle Allemagne">
-  <meta property="og:description" content="Immersion accélérée en langue allemande (A1-C1), Auto-École intégrée, salle laptops TELC et insertion professionnelle directe en Allemagne à Yaoundé Ngousso.">
-  <meta property="og:image" content="assets/germany-hero.jpg">
+  <meta property="og:title" content="Germany Connect Institute — Votre passerelle vers l'Allemagne">
+  <meta property="og:description" content="Cours d'allemand A1–C1, préparation aux examens officiels, Auto-École intégrée et accompagnement visa à Yaoundé Ngousso.">
+  <meta property="og:image" content="assets/campus-entrance-2.jpg">
 
-  <!-- Favicon SVG -->
   <link rel="icon" type="image/svg+xml" href="assets/logo-icon.svg">
 
-  <!-- Typographies Distinctives : Space Grotesk (Titres), DM Serif Display (Accents Dramatiques), Space Mono (Données/Télémétrie), Plus Jakarta Sans (Corps) -->
+  <!-- Thème appliqué avant le rendu pour éviter le flash -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('gci_theme');
+        if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Space+Grotesk:wght@400;500;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap" rel="stylesheet">
 
-  <!-- Icônes Vectorielles Font Awesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
-  <!-- Feuille de Styles Principale -->
-  <link rel="stylesheet" href="styles.css?v=6.0">
+  <link rel="stylesheet" href="styles.css?v=8.1">
 </head>
-<body class="german-institute-app">
+<body>
 
-  <!-- Overlay Texture Bruit SVG Inline Global -->
-  <svg class="global-noise-overlay" aria-hidden="true">
-    <filter id="noiseFilter">
-      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/>
-      <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.04 0"/>
-    </filter>
-    <rect width="100%" height="100%" filter="url(#noiseFilter)"/>
-  </svg>
+  <a class="skip-link" href="#mainContent">Aller au contenu</a>
 
-  <!-- ==========================================================================
-       1. NAVBAR : L'ÎLE FLOTTANTE CENTRÉE
-       ========================================================================== -->
-  <header class="floating-island-nav" id="floatingNav">
-    <nav class="nav-pill" aria-label="Navigation principale">
-      <!-- Logo Officiel -->
-      <a href="#accueil" class="brand-logo-pill" aria-label="Germany Connect Institute Accueil">
-        <div class="logo-circle-wrap">
-          <svg class="official-logo-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M 50 12 C 73 12, 90 28, 90 48 C 90 62, 80 75, 68 82 C 64 84, 58 80, 60 75 C 68 70, 75 60, 75 48 C 75 35, 63 24, 50 24 C 33 24, 20 38, 20 54 C 20 70, 33 84, 50 84 C 54 84, 56 89, 53 92 C 48 95, 42 96, 36 94 C 16 88, 5 70, 5 50 C 5 28, 24 12, 50 12 Z" fill="#E63946"/>
-            <path d="M 48 28 C 60 28, 70 37, 70 49 C 70 54, 66 56, 62 56 L 48 56 C 45 56, 43 54, 43 51 C 43 48, 45 46, 48 46 L 58 46 C 56 40, 52 38, 48 38 C 40 38, 32 44, 32 52 C 32 60, 40 68, 48 68 C 54 68, 58 64, 60 60 C 62 56, 68 58, 67 63 C 63 72, 56 78, 48 78 C 33 78, 22 66, 22 52 C 22 38, 33 28, 48 28 Z" fill="#FFB703"/>
-          </svg>
-        </div>
-        <div class="brand-text-block">
-          <div class="brand-line">
-            <span class="brand-word-dark">GERMANY</span>
-            <span class="brand-word-red">CONNECT</span>
-          </div>
-          <span class="brand-tagline">INSTITUTE // YAOUNDÉ</span>
-        </div>
+  <!-- ============ EN-TÊTE ============ -->
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <a href="#accueil" class="brand" aria-label="Germany Connect Institute, accueil">
+        <img class="logo logo-dark-text" src="assets/logo-germany-connect.png" alt="Germany Connect" width="2238" height="889">
+        <img class="logo logo-light-text" src="assets/logo-germany-connect-white.png" alt="" aria-hidden="true" width="2238" height="889">
       </a>
 
-      <!-- Liens de Navigation Desktop -->
-      <ul class="nav-links" id="desktopNavLinks">
-        <li><a href="#accueil" class="nav-item active">Accueil</a></li>
-        <li><a href="#atouts" class="nav-item">Atouts</a></li>
-        <li><a href="#manifeste" class="nav-item">Manifeste</a></li>
-        <li><a href="#protocole" class="nav-item">Protocole</a></li>
-        <li><a href="#formations" class="nav-item">Formations</a></li>
-        <li><a href="#simulateur" class="nav-item">Simulateur</a></li>
-        <li><a href="#quiz" class="nav-item">Test Niveau</a></li>
-        <li><a href="#campus" class="nav-item">Campus</a></li>
-      </ul>
+      <nav class="main-nav" aria-label="Navigation principale">
+        <ul>
+          <li><a href="#poles" class="nav-link">L'institut</a></li>
+          <li><a href="#parcours" class="nav-link">Parcours</a></li>
+          <li><a href="#formations" class="nav-link">Formations &amp; tarifs</a></li>
+          <li><a href="#simulateur" class="nav-link">Budget</a></li>
+          <li><a href="#quiz" class="nav-link">Test de niveau</a></li>
+          <li><a href="#campus" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
 
-      <!-- Cluster Droite : Badge Statut, Commutateur Thème & CTA Magnétique -->
-      <div class="nav-right-cluster">
-        <!-- Commutateur de Thème (Sombre / Clair) -->
-        <button type="button" class="theme-toggle-btn" id="themeToggleBtn" aria-label="Changer de thème (Sombre / Clair)" title="Basculer entre Mode Sombre et Mode Clair">
-          <i class="fa-solid fa-moon icon-moon"></i>
-          <i class="fa-solid fa-sun icon-sun"></i>
+      <div class="header-actions">
+        <button type="button" class="icon-btn theme-toggle" aria-label="Basculer entre thème clair et sombre">
+          <i class="fa-solid fa-moon icon-moon" aria-hidden="true"></i>
+          <i class="fa-solid fa-sun icon-sun" aria-hidden="true"></i>
         </button>
-
-        <div class="live-status-pill" title="Inscriptions actuellement ouvertes pour la session">
-          <span class="live-dot-pulse"></span>
-          <span class="live-text-mono">SESSIONS 2026</span>
-        </div>
-
-        <button type="button" class="btn-magnetic btn-brand-red open-enroll-modal" data-course="Orientation Générale">
-          <span class="btn-inner-text">S'inscrire <i class="fa-solid fa-arrow-up-right-from-square"></i></span>
-        </button>
-
-        <!-- Bouton Déclencheur Menu Mobile -->
-        <button type="button" class="mobile-toggle-btn" id="mobileMenuBtn" aria-label="Ouvrir le menu de navigation mobile">
-          <span class="bar-line"></span>
-          <span class="bar-line"></span>
+        <button type="button" class="btn btn-primary btn-sm open-enroll-modal header-cta" data-course="Consultation d'Orientation Gratuite">S'inscrire</button>
+        <button type="button" class="icon-btn menu-btn" id="mobileMenuBtn" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobileDrawer">
+          <span class="menu-bars" aria-hidden="true"><span></span><span></span></span>
         </button>
       </div>
-    </nav>
+    </div>
   </header>
 
-  <!-- Tiroir de Navigation Mobile -->
+  <!-- Menu mobile -->
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
   <aside class="mobile-drawer" id="mobileDrawer" aria-label="Menu mobile" aria-hidden="true">
-    <div class="drawer-header">
-      <div class="brand-logo-pill">
-        <div class="logo-circle-wrap">
-          <svg class="official-logo-svg" viewBox="0 0 100 100" fill="none" style="width:30px;height:30px;" aria-hidden="true">
-            <path d="M 50 12 C 73 12, 90 28, 90 48 C 90 62, 80 75, 68 82 C 64 84, 58 80, 60 75 C 68 70, 75 60, 75 48 C 75 35, 63 24, 50 24 C 33 24, 20 38, 20 54 C 20 70, 33 84, 50 84 C 54 84, 56 89, 53 92 C 48 95, 42 96, 36 94 C 16 88, 5 70, 5 50 C 5 28, 24 12, 50 12 Z" fill="#E63946"/>
-            <path d="M 48 28 C 60 28, 70 37, 70 49 C 70 54, 66 56, 62 56 L 48 56 C 45 56, 43 54, 43 51 C 43 48, 45 46, 48 46 L 58 46 C 56 40, 52 38, 48 38 C 40 38, 32 44, 32 52 C 32 60, 40 68, 48 68 C 54 68, 58 64, 60 60 C 62 56, 68 58, 67 63 C 63 72, 56 78, 48 78 C 33 78, 22 66, 22 52 C 22 38, 33 28, 48 28 Z" fill="#FFB703"/>
-          </svg>
-        </div>
-        <div class="brand-text-block">
-          <div class="brand-line">
-            <span class="brand-word-dark">GERMANY</span>
-            <span class="brand-word-red">CONNECT</span>
-          </div>
-          <span class="brand-tagline">INSTITUTE</span>
-        </div>
-      </div>
-
-      <div class="drawer-header-actions">
-        <button type="button" class="theme-toggle-btn mobile-theme-btn" id="mobileThemeToggleBtn" aria-label="Basculer le thème">
-          <i class="fa-solid fa-moon icon-moon"></i>
-          <i class="fa-solid fa-sun icon-sun"></i>
-        </button>
-        <button type="button" class="drawer-close-btn" id="drawerCloseBtn" aria-label="Fermer le menu">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </div>
+    <div class="drawer-head">
+      <span class="drawer-title">Menu</span>
+      <button type="button" class="icon-btn" id="drawerCloseBtn" aria-label="Fermer le menu"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
     </div>
-
     <ul class="drawer-menu">
-      <li><a href="#accueil" class="drawer-link"><span class="drawer-num">01.</span> Accueil</a></li>
-      <li><a href="#atouts" class="drawer-link"><span class="drawer-num">02.</span> Pôles &amp; Atouts Clés</a></li>
-      <li><a href="#manifeste" class="drawer-link"><span class="drawer-num">03.</span> Manifeste</a></li>
-      <li><a href="#protocole" class="drawer-link"><span class="drawer-num">04.</span> Protocole de Réussite</a></li>
-      <li><a href="#formations" class="drawer-link"><span class="drawer-num">05.</span> Formations &amp; Tarifs</a></li>
-      <li><a href="#simulateur" class="drawer-link"><span class="drawer-num">06.</span> Simulateur de Budget</a></li>
-      <li><a href="#quiz" class="drawer-link"><span class="drawer-num">07.</span> Test de Niveau Express</a></li>
-      <li><a href="#campus" class="drawer-link"><span class="drawer-num">08.</span> Campus &amp; Contact</a></li>
+      <li><a href="#poles" class="drawer-link">L'institut</a></li>
+      <li><a href="#parcours" class="drawer-link">Parcours vers l'Allemagne</a></li>
+      <li><a href="#formations" class="drawer-link">Formations &amp; tarifs</a></li>
+      <li><a href="#simulateur" class="drawer-link">Simulateur de budget</a></li>
+      <li><a href="#quiz" class="drawer-link">Test de niveau</a></li>
+      <li><a href="#campus" class="drawer-link">Campus &amp; contact</a></li>
     </ul>
-
-    <div class="drawer-footer">
-      <button type="button" class="btn-magnetic btn-brand-red w-full open-enroll-modal" data-course="Inscription Mobile">
-        <span class="btn-inner-text">Réserver une Consultation <i class="fa-solid fa-calendar-check"></i></span>
+    <div class="drawer-foot">
+      <button type="button" class="btn btn-primary btn-block open-enroll-modal" data-course="Consultation d'Orientation Gratuite">Réserver une consultation</button>
+      <a href="tel:+237696005112" class="drawer-contact"><i class="fa-solid fa-phone" aria-hidden="true"></i> +237 696 005 112</a>
+      <a href="mailto:germanyconnectinstitut@gmail.com" class="drawer-contact"><i class="fa-solid fa-envelope" aria-hidden="true"></i> germanyconnectinstitut@gmail.com</a>
+      <a href="https://wa.me/491749632778?text=Bonjour%20Germany%20Connect%20Institute,%20je%20souhaite%20des%20renseignements" target="_blank" rel="noopener noreferrer" class="drawer-contact"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> +49 174 9632778</a>
+      <a href="https://www.tiktok.com/@germanyconnectinstitut" target="_blank" rel="noopener noreferrer" class="drawer-contact"><i class="fa-brands fa-tiktok" aria-hidden="true"></i> @germanyconnectinstitut</a>
+      <button type="button" class="drawer-theme theme-toggle">
+        <i class="fa-solid fa-moon icon-moon" aria-hidden="true"></i>
+        <i class="fa-solid fa-sun icon-sun" aria-hidden="true"></i>
+        <span>Changer de thème</span>
       </button>
-      
-      <div class="drawer-quick-contacts">
-        <a href="tel:+237696005112" class="drawer-contact-row">
-          <i class="fa-solid fa-phone"></i> +237 696 005 112
-        </a>
-        <a href="https://wa.me/491749632778?text=Bonjour%20Germany%20Connect%20Institute,%20je%20souhaite%20des%20renseignements" target="_blank" rel="noopener noreferrer" class="drawer-contact-row text-gold">
-          <i class="fa-brands fa-whatsapp"></i> +49 174 9632778 (Support WhatsApp)
-        </a>
-      </div>
     </div>
   </aside>
-  <div class="drawer-backdrop" id="drawerBackdrop"></div>
 
-  <!-- CONTENU PRINCIPAL -->
   <main id="mainContent">
 
-    <!-- ==========================================================================
-         2. HERO SECTION : LE PLAN D'OUVERTURE CINÉMATOGRAPHIQUE (100dvh)
-         ========================================================================== -->
-    <section class="hero-cinematic" id="accueil">
-      <div class="hero-bg-photo" style="background-image: url('assets/germany-hero.jpg');" role="img" aria-label="Étudiants et campus Germany Connect Institute"></div>
-      <div class="hero-tint-overlay"></div>
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="accueil">
+      <div class="hero-bg" aria-hidden="true">
+        <img src="assets/germany-hero.jpg" alt="" width="1376" height="768" fetchpriority="high">
+      </div>
+      <div class="hero-shade" aria-hidden="true"></div>
 
-      <div class="container hero-container">
-        <!-- Badge de Télémétrie Supérieur -->
-        <div class="hero-telemetry-cluster">
-          <div class="telemetry-tag tag-primary">
-            <span class="tag-accent-bar"></span>
-            <span class="tag-mono">PÔLE LINGUISTIQUE // A1 &rarr; C1</span>
-          </div>
-          <div class="telemetry-tag tag-gold">
-            <span class="tag-accent-bar"></span>
-            <span class="tag-mono">AUTO-ÉCOLE GCONNECT INTÉGRÉE</span>
-          </div>
-          <div class="telemetry-tag tag-subtle">
-            <span class="tag-mono">YAOUNDÉ NGOUSSO</span>
-          </div>
-        </div>
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <p class="hero-place reveal">
+            <span class="flag-rule" aria-hidden="true"></span>
+            Yaoundé · Carrefour Ngousso
+            <span class="hero-live"><span class="status-dot" aria-hidden="true"></span> Inscriptions 2026 ouvertes</span>
+          </p>
 
-        <!-- Titre Hero Dramatique avec Contraste Typographique Massif -->
-        <div class="hero-headline-block">
-          <h1 class="hero-title">
-            <span class="hero-title-lead">L'Excellence Allemande est</span>
-            <em class="hero-title-italic">Votre Passerelle.</em>
+          <h1 class="hero-title" aria-label="Apprenez l'allemand à Yaoundé et partez étudier, travailler ou vous former en Allemagne.">
+            <span class="hero-line reveal" aria-hidden="true">Apprenez l'allemand.</span>
+            <span class="hero-line reveal" aria-hidden="true">Partez
+              <span class="rotator" id="heroRotator">
+                <span class="rotator-word is-current">étudier</span>
+                <span class="rotator-word">travailler</span>
+                <span class="rotator-word">vous former</span>
+              </span>
+            </span>
+            <span class="hero-line reveal" aria-hidden="true">en Allemagne.</span>
           </h1>
-          <p class="hero-subtext">
-            Centre linguistique d'élite à Yaoundé combinant <strong>98% de réussite certifiée</strong> aux examens officiels (Goethe, TELC, ÖSD), formation au permis de conduire avec <strong>l'Auto-École GCONNECT</strong>, et insertion directe en Allemagne (Visas, Ausbildung &amp; Études).
+
+          <p class="hero-lead reveal">
+            Cours d'allemand de A1 à C1, préparation aux examens Goethe, TELC et ÖSD,
+            <strong>Auto-École GCONNECT</strong> intégrée et accompagnement visa et Ausbildung — sur un seul campus.
           </p>
+
+          <div class="hero-actions reveal">
+            <button type="button" class="btn btn-primary btn-lg open-enroll-modal" data-course="Consultation d'Orientation Gratuite">
+              Réserver une consultation <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </button>
+            <a href="#quiz" class="btn btn-glass btn-lg"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> Tester mon niveau</a>
+          </div>
+
+          <dl class="hero-stats reveal" aria-label="L'institut en bref">
+            <div><dt>Réussite aux examens</dt><dd>98&nbsp;%</dd></div>
+            <div><dt>Partis en Allemagne</dt><dd>+450</dd></div>
+            <div><dt>Niveaux</dt><dd>A1 → C1</dd></div>
+          </dl>
         </div>
 
-        <!-- Cluster d'Actions Directes (3 CTA Clés) -->
-        <div class="hero-actions-row">
-          <button type="button" class="btn-magnetic btn-brand-red open-enroll-modal" data-course="Session Intensive A1-B2">
-            <span class="btn-inner-text">Réserver une Consultation <i class="fa-solid fa-arrow-right"></i></span>
-          </button>
-
-          <a href="#quiz" class="btn-magnetic btn-brand-gold">
-            <span class="btn-inner-text"><i class="fa-solid fa-graduation-cap"></i> Test de Niveau Express</span>
+        <figure class="hero-card reveal">
+          <div class="hero-card-img">
+            <img src="assets/campus-entrance-2.jpg" alt="Entrée du campus Germany Connect Institute à Ngousso, avec la bannière du centre de cours d'allemand et le drapeau allemand" width="1024" height="768">
+          </div>
+          <figcaption>
+            <span class="hero-card-title">Notre campus à Ngousso</span>
+            <span class="hero-card-text">Cours du matin, du soir et le samedi</span>
+          </figcaption>
+          <a class="hero-card-tiktok" href="https://www.tiktok.com/@germanyconnectinstitut" target="_blank" rel="noopener noreferrer">
+            <i class="fa-brands fa-tiktok" aria-hidden="true"></i>
+            <span>Nos cours en vidéo sur TikTok</span>
+            <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
           </a>
+        </figure>
+      </div>
 
-          <button type="button" class="btn-magnetic btn-brand-outline open-brochure-modal">
-            <span class="btn-inner-text"><i class="fa-solid fa-file-pdf"></i> Brochure Officielle 2026</span>
-          </button>
-        </div>
-
-        <!-- Chiffres Clés & Métriques en Bande Inférieure -->
-        <div class="hero-metrics-bar">
-          <div class="metric-cell">
-            <span class="metric-num"><span class="counter-val" data-target="98">98</span>%</span>
-            <span class="metric-label">Taux de Réussite Goethe/TELC</span>
-          </div>
-          <div class="metric-separator" aria-hidden="true"></div>
-          <div class="metric-cell">
-            <span class="metric-num">+<span class="counter-val" data-target="450">450</span></span>
-            <span class="metric-label">Candidats Insérés en Allemagne</span>
-          </div>
-          <div class="metric-separator" aria-hidden="true"></div>
-          <div class="metric-cell">
-            <span class="metric-num"><span class="counter-val" data-target="100">100</span>%</span>
-            <span class="metric-label">Véhicules Double Commande</span>
-          </div>
-          <div class="metric-separator" aria-hidden="true"></div>
-          <div class="metric-cell">
-            <span class="metric-num">A1-C1</span>
-            <span class="metric-label">Niveaux CECRL Certifiés</span>
-          </div>
+      <div class="hero-ticker" aria-hidden="true">
+        <div class="ticker-track">
+          <span>Goethe-Zertifikat</span><span>TELC Deutsch</span><span>ÖSD</span><span>Ausbildung</span><span>Visa d'études</span><span>Permis B</span><span>A1 → C1</span><span>Logement en Allemagne</span>
+          <span>Goethe-Zertifikat</span><span>TELC Deutsch</span><span>ÖSD</span><span>Ausbildung</span><span>Visa d'études</span><span>Permis B</span><span>A1 → C1</span><span>Logement en Allemagne</span>
         </div>
       </div>
     </section>
 
-    <!-- ==========================================================================
-         3. ATOUTS CLÉS : ARTEFACTS FONCTIONNELS
-         ========================================================================== -->
-    <section class="section-functional-artifacts" id="atouts">
+    <!-- ============ VIDÉO DE PRÉSENTATION ============ -->
+    <section class="section section-ink" id="video" aria-labelledby="videoTitle">
       <div class="container">
-        
-        <div class="section-header-academic">
-          <div class="section-tag-row">
-            <span class="academic-tag">01 // ARTEFACTS FONCTIONNELS</span>
-            <span class="academic-flag-stripe"></span>
+        <header class="section-head">
+          <h2 class="section-title" id="videoTitle">Germany Connect <em>en une minute.</em></h2>
+          <p class="section-lead">Cours, examens, permis et départ en Allemagne : découvrez l'institut en vidéo, en français et en allemand. Les sous-titres sont intégrés, vous pouvez la regarder sans le son.</p>
+        </header>
+
+        <figure class="promo-video reveal">
+          <div class="promo-frame">
+            <video id="promoVideo" controls playsinline preload="none"
+                   poster="assets/video/germany-connect-promo-poster.jpg" width="1920" height="1080"
+                   aria-label="Vidéo de présentation de Germany Connect Institute, en français et en allemand, avec sous-titres">
+              <source src="assets/video/germany-connect-promo.mp4" type="video/mp4">
+              Votre navigateur ne lit pas la vidéo.
+              <a href="assets/video/germany-connect-promo.mp4">Télécharger la vidéo (MP4)</a>.
+            </video>
+            <button type="button" class="promo-play" id="promoPlay" aria-label="Lire la vidéo de présentation (1 minute)">
+              <span class="promo-play-icon"><i class="fa-solid fa-play" aria-hidden="true"></i></span>
+              <span class="promo-play-text">Regarder la vidéo <span class="promo-play-meta">1 min · FR / DE</span></span>
+            </button>
           </div>
-          <h2 class="academic-title">Trois Piliers Conçus pour <em class="serif-accent">Votre Réussite.</em></h2>
-          <p class="academic-subtitle">
-            Une architecture pédagogique unique à Yaoundé, alliant immersion linguistique rigoureuse, autonomie de mobilité et accompagnement administratif bilatéral.
-          </p>
-        </div>
-
-        <div class="artifacts-grid">
-          
-          <!-- Artefact 1 : Mélangeur Diagnostique d'Examens -->
-          <div class="artifact-card card-diagnostics" id="artifactDiagnostics">
-            <div class="card-header-meta">
-              <div class="meta-left">
-                <span class="card-chip-tag">ARTEFACT_01</span>
-                <h3 class="card-inner-title">Mélangeur Diagnostique d'Examens</h3>
-              </div>
-              <span class="status-indicator-live" title="Cycle actif"><i class="fa-solid fa-arrows-rotate"></i> 3s Cycle</span>
-            </div>
-
-            <p class="card-desc">
-              Préparation ciblée aux trois formats d'examens internationaux reconnus par les universités et employeurs en Allemagne.
-            </p>
-
-            <!-- Stack de Cartes d'Examens Interactives -->
-            <div class="exam-deck-container" id="examDeck">
-              <div class="exam-card-slide is-front" data-exam="goethe">
-                <div class="exam-card-top">
-                  <span class="exam-badge badge-goethe">GOETHE-ZERTIFIKAT</span>
-                  <span class="exam-rate">98.4% Succès</span>
-                </div>
-                <h4 class="exam-name">Épreuves A1 à C1 — Institut Goethe</h4>
-                <div class="exam-details-list">
-                  <div class="detail-item"><i class="fa-solid fa-circle-check"></i> Compréhension orale &amp; écrite sur matériel officiel</div>
-                  <div class="detail-item"><i class="fa-solid fa-circle-check"></i> Simulations d'expression orale en binômes chronométrés</div>
-                </div>
-              </div>
-
-              <div class="exam-card-slide is-middle" data-exam="telc">
-                <div class="exam-card-top">
-                  <span class="exam-badge badge-telc">TELC DEUTSCH</span>
-                  <span class="exam-rate">97.8% Succès</span>
-                </div>
-                <h4 class="exam-name">TELC B1 / B2 Beruf &amp; Pflege</h4>
-                <div class="exam-details-list">
-                  <div class="detail-item"><i class="fa-solid fa-circle-check"></i> Salle laptops dédiée pour entraînements informatisés</div>
-                  <div class="detail-item"><i class="fa-solid fa-circle-check"></i> Vocabulaire technique pour soins de santé &amp; métiers techniques</div>
-                </div>
-              </div>
-
-              <div class="exam-card-slide is-back" data-exam="osd">
-                <div class="exam-card-top">
-                  <span class="exam-badge badge-osd">ÖSD ZERTIFIKAT</span>
-                  <span class="exam-rate">99.1% Succès</span>
-                </div>
-                <h4 class="exam-name">ÖSD A1-B2 Autriche &amp; Allemagne</h4>
-                <div class="exam-details-list">
-                  <div class="detail-item"><i class="fa-solid fa-circle-check"></i> Validation modulable (modules écrits &amp; oraux séparés)</div>
-                  <div class="detail-item"><i class="fa-solid fa-circle-check"></i> Coaching intensif aux épreuves de rédaction</div>
-                </div>
-              </div>
-            </div>
-
-            <div class="exam-deck-controls">
-              <button type="button" class="btn-deck-prev" id="btnExamPrev" aria-label="Examen précédent"><i class="fa-solid fa-chevron-left"></i></button>
-              <div class="deck-dots" id="examDeckDots">
-                <span class="dot-item active" data-index="0"></span>
-                <span class="dot-item" data-index="1"></span>
-                <span class="dot-item" data-index="2"></span>
-              </div>
-              <button type="button" class="btn-deck-next" id="btnExamNext" aria-label="Examen suivant"><i class="fa-solid fa-chevron-right"></i></button>
-            </div>
-          </div>
-
-          <!-- Artefact 2 : Machine à Écrire Télémétrie & Salle Laptops -->
-          <div class="artifact-card card-telemetry">
-            <div class="card-header-meta">
-              <div class="meta-left">
-                <span class="card-chip-tag">ARTEFACT_02</span>
-                <h3 class="card-inner-title">Télémétrie Immersion &amp; Laptops</h3>
-              </div>
-              <div class="telemetry-live-badge">
-                <span class="pulse-green"></span>
-                <span class="mono-code">STREAM_ACTIF</span>
-              </div>
-            </div>
-
-            <p class="card-desc">
-              Équipements numériques de pointe et suivi individualisé de la progression linguistique de chaque apprenant.
-            </p>
-
-            <div class="terminal-box-styled">
-              <div class="term-header">
-                <span class="term-title"><i class="fa-solid fa-desktop"></i> FLUX_PEDAGOGIQUE_CONNECT</span>
-                <span class="term-time" id="telemetryTimestamp">13:30:00 UTC+1</span>
-              </div>
-              <div class="term-body" id="telemetryBody">
-                <div class="term-line line-dim">&gt; Initialisation du protocole d'apprentissage immersif...</div>
-                <div class="term-line line-highlight">&gt; [CAMPUS] Salle multimédia : 25 postes laptops configurés pour TELC/Goethe.</div>
-                <div class="term-line line-gold">&gt; [PRATIQUE] Épreuve orale B2 : Fluidité phonétique 94% validée.</div>
-                <div class="term-line line-active" id="typewriterTarget">
-                  &gt; Suivi personnalisé : Modules grammaticaux et cas pratiques en cours...
-                </div>
-              </div>
-            </div>
-
-            <div class="card-bottom-stats">
-              <div class="stat-pill-item">
-                <span class="pill-label">Horaires Flexibles</span>
-                <span class="pill-val">Matin • Soir • Samedi</span>
-              </div>
-              <div class="stat-pill-item">
-                <span class="pill-label">Laboratoire Audio</span>
-                <span class="pill-val">Casques HD Individuels</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Artefact 3 : Auto-École GCONNECT & Accompagnement Visa -->
-          <div class="artifact-card card-driving-visa">
-            <div class="card-header-meta">
-              <div class="meta-left">
-                <span class="card-chip-tag">ARTEFACT_03</span>
-                <h3 class="card-inner-title">Auto-École GCONNECT &amp; Passerelle</h3>
-              </div>
-              <span class="card-chip-gold"><i class="fa-solid fa-car"></i> DOUBLE COMMANDE</span>
-            </div>
-
-            <p class="card-desc">
-              Obtention du permis de conduire à Yaoundé et constitution intégrale du dossier pour l'Allemagne en un seul lieu.
-            </p>
-
-            <div class="dual-feature-display">
-              <div class="feature-col">
-                <div class="feature-col-photo" style="background-image: url('assets/auto-ecole-gconnect.jpg');" role="img" aria-label="Auto-École GCONNECT"></div>
-                <div class="feature-col-content">
-                  <h4 class="col-title"><i class="fa-solid fa-id-card"></i> Permis de Conduire B</h4>
-                  <p class="col-text">Moniteurs agréés, circulation en conditions réelles et préparation au code de la route international.</p>
-                </div>
-              </div>
-
-              <div class="feature-col">
-                <div class="feature-col-photo" style="background-image: url('assets/campus-entrance.jpg');" role="img" aria-label="Entrée campus et pôle visa"></div>
-                <div class="feature-col-content">
-                  <h4 class="col-title"><i class="fa-solid fa-passport"></i> Insertion &amp; Visa</h4>
-                  <p class="col-text">Traduction certifiée, légalisation, contrats d'Ausbildung en santé/tech et réservation de logement.</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="card-footer-cta">
-              <button type="button" class="btn-full-cta open-enroll-modal" data-course="Pack Passerelle Complète (Langue + Permis + Visa)">
-                <span>Consulter les Packs Tout-en-Un <i class="fa-solid fa-arrow-right"></i></span>
-              </button>
-            </div>
-          </div>
-
-        </div>
+          <figcaption class="promo-caption">
+            <span><i class="fa-solid fa-closed-captioning" aria-hidden="true"></i> Sous-titres intégrés · 1 min · 9,5 Mo</span>
+            <a class="btn btn-whatsapp" href="https://wa.me/491749632778?text=Bonjour%20Germany%20Connect%20Institute,%20j'ai%20vu%20votre%20vid%C3%A9o%20et%20je%20souhaite%20des%20informations" target="_blank" rel="noopener noreferrer">
+              <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Une question ? Écrivez-nous
+            </a>
+          </figcaption>
+        </figure>
       </div>
     </section>
 
-    <!-- ==========================================================================
-         4. PHILOSOPHIE : LE MANIFESTE ACADÉMIQUE
-         ========================================================================== -->
-    <section class="section-manifesto" id="manifeste">
-      <div class="manifesto-bg-layer" style="background-image: url('assets/berlin-bg.jpg');" role="img" aria-label="Berlin et opportunités professionnelles"></div>
-      <div class="manifesto-tint-layer"></div>
+    <!-- ============ TROIS PÔLES ============ -->
+    <section class="section" id="poles">
+      <div class="container">
+        <header class="section-head">
+          <h2 class="section-title">Trois pôles, <em>une seule adresse.</em></h2>
+          <p class="section-lead">Ailleurs, il faut une école de langue, une auto-école et un intermédiaire pour le visa. Ici, tout se fait au même endroit, avec la même équipe qui suit votre dossier.</p>
+        </header>
 
-      <div class="container manifesto-inner">
-        <div class="manifesto-badge">
-          <span class="manifesto-tag">02 // LE MANIFESTE GERMANY CONNECT</span>
-        </div>
+        <div class="poles-grid">
+          <!-- Pôle langue -->
+          <article class="pole pole-main">
+            <div class="pole-label"><i class="fa-solid fa-book-open" aria-hidden="true"></i> Pôle linguistique</div>
+            <h3 class="pole-title">Préparation aux examens officiels</h3>
+            <p class="pole-text">Trois formats d'examens reconnus par les universités, les employeurs et l'ambassade. Choisissez celui que demande votre projet.</p>
 
-        <div class="manifesto-contrast-grid">
-          
-          <div class="contrast-col common-approach">
-            <span class="contrast-label"><i class="fa-solid fa-circle-xmark"></i> La plupart des centres se limitent à :</span>
-            <div class="contrast-content-box">
-              <p class="contrast-body">Des cours magistraux passifs dans des salles surchargées, sans mise en situation réelle d'examen et sans accompagnement pour les démarches post-certificat.</p>
-              <ul class="contrast-points">
-                <li><i class="fa-solid fa-xmark"></i> Aucune pratique sur postes informatiques pour le format TELC</li>
-                <li><i class="fa-solid fa-xmark"></i> L'étudiant doit chercher une auto-école indépendante pour son permis</li>
-                <li><i class="fa-solid fa-xmark"></i> Absence de partenariats directs avec des employeurs et hôpitaux en Allemagne</li>
+            <div class="exam-tabs" role="tablist" aria-label="Examens préparés">
+              <button type="button" role="tab" class="exam-tab is-active" aria-selected="true" aria-controls="exam-goethe" id="tab-goethe">Goethe</button>
+              <button type="button" role="tab" class="exam-tab" aria-selected="false" aria-controls="exam-telc" id="tab-telc" tabindex="-1">TELC</button>
+              <button type="button" role="tab" class="exam-tab" aria-selected="false" aria-controls="exam-osd" id="tab-osd" tabindex="-1">ÖSD</button>
+            </div>
+
+            <div class="exam-panel" role="tabpanel" id="exam-goethe" aria-labelledby="tab-goethe">
+              <div class="exam-panel-head">
+                <h4>Goethe-Zertifikat, A1 à C1</h4>
+                <span class="exam-rate"><strong>98,4&nbsp;%</strong> de réussite</span>
+              </div>
+              <ul class="check-list">
+                <li>Compréhension orale et écrite sur matériel officiel</li>
+                <li>Simulations d'expression orale en binômes, chronométrées</li>
               </ul>
             </div>
-          </div>
-
-          <div class="contrast-col differentiated-approach">
-            <span class="contrast-label accent-gold"><i class="fa-solid fa-circle-check"></i> Germany Connect Institute bâtit :</span>
-            <div class="contrast-content-box highlight-box">
-              <h3 class="manifesto-hero-quote">
-                Un écosystème d'autonomie complète pour <em class="serif-gold">Votre Avenir en Allemagne.</em>
-              </h3>
-              <p class="contrast-body">
-                Nous fusionnons l'apprentissage linguistique haute intensité (A1 à C1), la maîtrise de la conduite automobile et la concrétisation administrative de votre contrat de travail ou d'études.
-              </p>
-              <ul class="contrast-points positive-points">
-                <li><i class="fa-solid fa-check"></i> <strong>Salle multimédia</strong> avec laptops individuels et examens blancs hebdomadaires</li>
-                <li><i class="fa-solid fa-check"></i> <strong>Auto-École GCONNECT</strong> intégrée au campus de Ngousso</li>
-                <li><i class="fa-solid fa-check"></i> <strong>Accompagnement bilatéral</strong> (Traduction, Légalisation, Entretien Visa, Logement)</li>
+            <div class="exam-panel" role="tabpanel" id="exam-telc" aria-labelledby="tab-telc" hidden>
+              <div class="exam-panel-head">
+                <h4>TELC B1 / B2 Beruf &amp; Pflege</h4>
+                <span class="exam-rate"><strong>97,8&nbsp;%</strong> de réussite</span>
+              </div>
+              <ul class="check-list">
+                <li>Salle de 25 ordinateurs pour s'entraîner au format informatisé</li>
+                <li>Vocabulaire des métiers de la santé et des métiers techniques</li>
               </ul>
             </div>
-          </div>
+            <div class="exam-panel" role="tabpanel" id="exam-osd" aria-labelledby="tab-osd" hidden>
+              <div class="exam-panel-head">
+                <h4>ÖSD A1 à B2, Autriche &amp; Allemagne</h4>
+                <span class="exam-rate"><strong>99,1&nbsp;%</strong> de réussite</span>
+              </div>
+              <ul class="check-list">
+                <li>Validation par modules (écrits et oraux séparés)</li>
+                <li>Coaching intensif aux épreuves de rédaction</li>
+              </ul>
+            </div>
 
+            <dl class="pole-meta">
+              <div><dt>Horaires</dt><dd>Matin · Soir · Samedi</dd></div>
+              <div><dt>Équipement</dt><dd>Laboratoire audio, casques individuels</dd></div>
+            </dl>
+          </article>
+
+          <!-- Pôle auto-école -->
+          <article class="pole pole-photo">
+            <div class="pole-img"><img src="assets/auto-ecole-gconnect.jpg" alt="Véhicule de l'Auto-École GCONNECT aux couleurs de Germany Connect" width="1024" height="768" loading="lazy"></div>
+            <div class="pole-body">
+              <div class="pole-label"><i class="fa-solid fa-car" aria-hidden="true"></i> Auto-École GCONNECT</div>
+              <h3 class="pole-title">Permis B sur véhicules à double commande</h3>
+              <p class="pole-text">Moniteurs agréés, conduite en conditions réelles à Yaoundé et préparation au code de la route.</p>
+            </div>
+          </article>
+
+          <!-- Pôle visa -->
+          <article class="pole pole-photo">
+            <div class="pole-img"><img src="assets/germany-hero.jpg" alt="Vue de Berlin au coucher du soleil" width="1376" height="768" loading="lazy"></div>
+            <div class="pole-body">
+              <div class="pole-label"><i class="fa-solid fa-passport" aria-hidden="true"></i> Passerelle Allemagne</div>
+              <h3 class="pole-title">Visa, Ausbildung et installation</h3>
+              <p class="pole-text">Traduction certifiée, légalisation, contrats d'Ausbildung en santé et en technique, préparation à l'entretien et recherche de logement.</p>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- ==========================================================================
-         5. PROTOCOLE DE RÉUSSITE : ARCHIVE ÉTAPES EN 3 PALIERS
-         ========================================================================== -->
-    <section class="section-protocol" id="protocole">
+    <!-- ============ COMPARAISON ============ -->
+    <section class="section section-ink" id="difference">
       <div class="container">
-        
-        <div class="section-header-academic">
-          <div class="section-tag-row">
-            <span class="academic-tag">03 // PROTOCOLE DE RÉUSSITE</span>
-            <span class="academic-flag-stripe"></span>
+        <header class="section-head">
+          <h2 class="section-title">Ce qui change <em>avec nous.</em></h2>
+          <p class="section-lead">La plupart des centres s'arrêtent au cours magistral. Nous vous accompagnons jusqu'au départ.</p>
+        </header>
+
+        <div class="compare" role="table" aria-label="Comparaison avec un centre classique">
+          <div class="compare-row compare-headrow" role="row">
+            <span role="columnheader" class="compare-topic">&nbsp;</span>
+            <span role="columnheader">Centre classique</span>
+            <span role="columnheader" class="compare-us">Germany Connect Institute</span>
           </div>
-          <h2 class="academic-title">De Yaoundé à Berlin : <em class="serif-accent">Le Parcours Structuré.</em></h2>
-          <p class="academic-subtitle">
-            Une méthode rigoureuse en 3 étapes clés sans improvisation, pensée pour sécuriser votre investissement et maximiser vos chances de départ.
-          </p>
+          <div class="compare-row" role="row">
+            <span role="rowheader" class="compare-topic">Format TELC</span>
+            <span role="cell" class="compare-no"><i class="fa-solid fa-xmark" aria-hidden="true"></i> Pas de pratique sur ordinateur</span>
+            <span role="cell" class="compare-yes"><i class="fa-solid fa-check" aria-hidden="true"></i> Salle multimédia et examens blancs chaque semaine</span>
+          </div>
+          <div class="compare-row" role="row">
+            <span role="rowheader" class="compare-topic">Permis de conduire</span>
+            <span role="cell" class="compare-no"><i class="fa-solid fa-xmark" aria-hidden="true"></i> Auto-école à trouver ailleurs</span>
+            <span role="cell" class="compare-yes"><i class="fa-solid fa-check" aria-hidden="true"></i> Auto-École GCONNECT sur le campus</span>
+          </div>
+          <div class="compare-row" role="row">
+            <span role="rowheader" class="compare-topic">Après le certificat</span>
+            <span role="cell" class="compare-no"><i class="fa-solid fa-xmark" aria-hidden="true"></i> Aucun lien avec des employeurs</span>
+            <span role="cell" class="compare-yes"><i class="fa-solid fa-check" aria-hidden="true"></i> Partenaires en Allemagne, visa, logement</span>
+          </div>
+          <div class="compare-row" role="row">
+            <span role="rowheader" class="compare-topic">Salles</span>
+            <span role="cell" class="compare-no"><i class="fa-solid fa-xmark" aria-hidden="true"></i> Classes surchargées</span>
+            <span role="cell" class="compare-yes"><i class="fa-solid fa-check" aria-hidden="true"></i> Suivi individuel de la progression</span>
+          </div>
         </div>
-
-        <div class="protocol-steps-grid">
-          
-          <!-- Étape 1 -->
-          <div class="protocol-card-step">
-            <div class="step-num-badge">PHASE_01</div>
-            <div class="step-icon-wrap">
-              <i class="fa-solid fa-book-open-reader"></i>
-            </div>
-            <h3 class="step-title">Immersion Linguistique &amp; Permis</h3>
-            <p class="step-desc">
-              Début des cours intensifs du niveau A1 au B2 avec nos enseignants certifiés. En parallèle, formation théorique et pratique au sein de notre Auto-École GCONNECT.
-            </p>
-            <div class="step-deliverables">
-              <span class="deliv-item"><i class="fa-solid fa-check"></i> Cours Matin/Soir</span>
-              <span class="deliv-item"><i class="fa-solid fa-check"></i> Conduite double commande</span>
-              <span class="deliv-item"><i class="fa-solid fa-check"></i> Lexique technique allemand</span>
-            </div>
-          </div>
-
-          <!-- Étape 2 -->
-          <div class="protocol-card-step is-highlighted">
-            <div class="step-num-badge badge-gold">PHASE_02</div>
-            <div class="step-icon-wrap icon-gold">
-              <i class="fa-solid fa-certificate"></i>
-            </div>
-            <h3 class="step-title">Certification Officielle &amp; Laptops</h3>
-            <p class="step-desc">
-              Entraînements intensifs en salle multimédia sur les épreuves types Goethe, TELC ou ÖSD. Séances de phonétique et simulations d'entretiens d'embauche.
-            </p>
-            <div class="step-deliverables">
-              <span class="deliv-item"><i class="fa-solid fa-check"></i> Simulations chronométrées</span>
-              <span class="deliv-item"><i class="fa-solid fa-check"></i> Inscription aux sessions officielles</span>
-              <span class="deliv-item"><i class="fa-solid fa-check"></i> Taux de réussite cible 98%</span>
-            </div>
-          </div>
-
-          <!-- Étape 3 -->
-          <div class="protocol-card-step">
-            <div class="step-num-badge">PHASE_03</div>
-            <div class="step-icon-wrap">
-              <i class="fa-solid fa-plane-departure"></i>
-            </div>
-            <h3 class="step-title">Contrat, Visa &amp; Installation</h3>
-            <p class="step-desc">
-              Mise en relation avec nos partenaires en Allemagne (Ausbildung en soins infirmiers, informatique, hôtellerie, métiers techniques), dépôt de visa et accueil.
-            </p>
-            <div class="step-deliverables">
-              <span class="deliv-item"><i class="fa-solid fa-check"></i> Contrat de travail / formation</span>
-              <span class="deliv-item"><i class="fa-solid fa-check"></i> Préparation entretien ambassade</span>
-              <span class="deliv-item"><i class="fa-solid fa-check"></i> Logement &amp; Intégration</span>
-            </div>
-          </div>
-
-        </div>
-
       </div>
     </section>
 
-    <!-- ==========================================================================
-         6. FORMATIONS & TARIFS TRANSPARENTS
-         ========================================================================== -->
-    <section class="section-formations" id="formations">
+    <!-- ============ PARCOURS ============ -->
+    <section class="section" id="parcours">
       <div class="container">
-        
-        <div class="section-header-academic">
-          <div class="section-tag-row">
-            <span class="academic-tag">04 // CATALOGUE ACADÉMIQUE</span>
-            <span class="academic-flag-stripe"></span>
-          </div>
-          <h2 class="academic-title">Formations Certifiantes &amp; <em class="serif-accent">Tarification Claire.</em></h2>
-          <p class="academic-subtitle">
-            Tous nos tarifs sont transparents en Francs CFA (XAF), incluant les supports pédagogiques, l'accès à la salle laptops et les examens blancs.
-          </p>
-        </div>
+        <header class="section-head">
+          <h2 class="section-title">De Yaoundé à l'Allemagne, <em>en trois étapes.</em></h2>
+          <p class="section-lead">Un parcours structuré pour sécuriser votre investissement et maximiser vos chances de départ.</p>
+        </header>
 
-        <!-- Filtres par catégorie -->
-        <div class="formations-filter-row">
-          <button type="button" class="filter-tab active" data-filter="all">Tous les Programmes</button>
-          <button type="button" class="filter-tab" data-filter="langue">Langue Allemande (A1-C1)</button>
-          <button type="button" class="filter-tab" data-filter="autoecole">Auto-École GCONNECT</button>
-          <button type="button" class="filter-tab" data-filter="pack">Packs Passerelle Tout-en-Un</button>
-        </div>
-
-        <!-- Grille des Programmes -->
-        <div class="formations-catalog-grid" id="formationsGrid">
-          
-          <!-- Niveau A1 -->
-          <div class="course-card-item" data-category="langue">
-            <div class="course-header">
-              <div class="course-badge-level">A1 // DÉBUTANT</div>
-              <span class="course-duration"><i class="fa-regular fa-clock"></i> 8 Semaines</span>
-            </div>
-            <h3 class="course-title">Allemand Général Niveau A1</h3>
-            <p class="course-summary">
-              Acquisition des bases fondamentales, grammaire essentielle, prononciation et premiers échanges quotidiens en allemand.
-            </p>
-            <div class="course-schedule-tag">
-              <i class="fa-solid fa-calendar-days"></i> Matin (08h-11h) ou Soir (17h-20h)
-            </div>
-            <div class="course-price-box">
-              <span class="price-val">100 000</span>
-              <span class="price-cur">FCFA / Session</span>
-            </div>
-            <button type="button" class="btn-course-enroll open-enroll-modal" data-course="Allemand Niveau A1 (100 000 FCFA)">
-              <span>S'inscrire à ce niveau <i class="fa-solid fa-arrow-right"></i></span>
-            </button>
-          </div>
-
-          <!-- Niveau A2 -->
-          <div class="course-card-item" data-category="langue">
-            <div class="course-header">
-              <div class="course-badge-level">A2 // ÉLÉMENTAIRE</div>
-              <span class="course-duration"><i class="fa-regular fa-clock"></i> 8 Semaines</span>
-            </div>
-            <h3 class="course-title">Allemand Général Niveau A2</h3>
-            <p class="course-summary">
-              Consolidation des structures de phrases complexes, compréhension écrite approfondie et expression spontanée.
-            </p>
-            <div class="course-schedule-tag">
-              <i class="fa-solid fa-calendar-days"></i> Matin (08h-11h) ou Soir (17h-20h)
-            </div>
-            <div class="course-price-box">
-              <span class="price-val">110 000</span>
-              <span class="price-cur">FCFA / Session</span>
-            </div>
-            <button type="button" class="btn-course-enroll open-enroll-modal" data-course="Allemand Niveau A2 (110 000 FCFA)">
-              <span>S'inscrire à ce niveau <i class="fa-solid fa-arrow-right"></i></span>
-            </button>
-          </div>
-
-          <!-- Niveau B1 (Recommandé Ausbildung) -->
-          <div class="course-card-item is-featured-course" data-category="langue">
-            <div class="featured-ribbon"><i class="fa-solid fa-star"></i> PIVOT AUSBILDUNG &amp; VISA</div>
-            <div class="course-header">
-              <div class="course-badge-level badge-gold">B1 // INTERMÉDIAIRE</div>
-              <span class="course-duration"><i class="fa-regular fa-clock"></i> 10 Semaines</span>
-            </div>
-            <h3 class="course-title">Allemand Niveau B1 Certifiant</h3>
-            <p class="course-summary">
-              Niveau clé exigé pour les contrats d'apprentissage (Ausbildung) et dossiers de visa d'études. Simulations Goethe/TELC complètes.
-            </p>
-            <div class="course-schedule-tag">
-              <i class="fa-solid fa-calendar-days"></i> Matin, Après-midi ou Soir
-            </div>
-            <div class="course-price-box">
-              <span class="price-val">130 000</span>
-              <span class="price-cur">FCFA / Session</span>
-            </div>
-            <button type="button" class="btn-course-enroll btn-gold-enroll open-enroll-modal" data-course="Allemand Niveau B1 (130 000 FCFA)">
-              <span>S'inscrire en B1 <i class="fa-solid fa-arrow-right"></i></span>
-            </button>
-          </div>
-
-          <!-- Niveau B2 -->
-          <div class="course-card-item" data-category="langue">
-            <div class="course-header">
-              <div class="course-badge-level">B2 // AVANCÉ</div>
-              <span class="course-duration"><i class="fa-regular fa-clock"></i> 10 Semaines</span>
-            </div>
-            <h3 class="course-title">Allemand Professionnel Niveau B2</h3>
-            <p class="course-summary">
-              Niveau requis pour les professions médicales (infirmiers, médecins), ingénieurs et études universitaires directes en Allemagne.
-            </p>
-            <div class="course-schedule-tag">
-              <i class="fa-solid fa-calendar-days"></i> Matin (08h-11h) ou Soir (17h-20h)
-            </div>
-            <div class="course-price-box">
-              <span class="price-val">140 000</span>
-              <span class="price-cur">FCFA / Session</span>
-            </div>
-            <button type="button" class="btn-course-enroll open-enroll-modal" data-course="Allemand Niveau B2 (140 000 FCFA)">
-              <span>S'inscrire en B2 <i class="fa-solid fa-arrow-right"></i></span>
-            </button>
-          </div>
-
-          <!-- Niveau C1 -->
-          <div class="course-card-item" data-category="langue">
-            <div class="course-header">
-              <div class="course-badge-level badge-gold">C1 // EXPERT</div>
-              <span class="course-duration"><i class="fa-regular fa-clock"></i> 10 à 12 Semaines</span>
-            </div>
-            <h3 class="course-title">Allemand Supérieur Niveau C1</h3>
-            <p class="course-summary">
-              Maîtrise autonome et fluide de la langue pour les spécialisations académiques, doctorats, recherche et carrières de haut niveau en Allemagne.
-            </p>
-            <div class="course-schedule-tag">
-              <i class="fa-solid fa-calendar-days"></i> Matin (08h-11h) ou Soir (17h-20h)
-            </div>
-            <div class="course-price-box">
-              <span class="price-val">150 000</span>
-              <span class="price-cur">FCFA / Session</span>
-            </div>
-            <button type="button" class="btn-course-enroll open-enroll-modal" data-course="Allemand Niveau C1 (150 000 FCFA)">
-              <span>S'inscrire en C1 <i class="fa-solid fa-arrow-right"></i></span>
-            </button>
-          </div>
-
-          <!-- Auto-École GCONNECT Permis B -->
-          <div class="course-card-item" data-category="autoecole">
-            <div class="course-header">
-              <div class="course-badge-level badge-car"><i class="fa-solid fa-car"></i> PERMIS B</div>
-              <span class="course-duration"><i class="fa-regular fa-clock"></i> 6 à 8 Semaines</span>
-            </div>
-            <h3 class="course-title">Auto-École GCONNECT — Permis B</h3>
-            <p class="course-summary">
-              Formation complète au code de la route, cours de conduite sur véhicules récents à double commande, passage officiel de l'examen.
-            </p>
-            <div class="course-schedule-tag">
-              <i class="fa-solid fa-calendar-days"></i> Séances pratiques flexibles selon disponibilités
-            </div>
-            <div class="course-price-box">
-              <span class="price-val">70 000</span>
-              <span class="price-cur">FCFA (Tout inclus)</span>
-            </div>
-            <button type="button" class="btn-course-enroll open-enroll-modal" data-course="Auto-École GCONNECT Permis B (70 000 FCFA)">
-              <span>Réserver mon Permis B <i class="fa-solid fa-arrow-right"></i></span>
-            </button>
-          </div>
-
-          <!-- Pack Passerelle Intégrale -->
-          <div class="course-card-item is-featured-pack" data-category="pack">
-            <div class="featured-ribbon-pack"><i class="fa-solid fa-bolt"></i> FORMULE ACCOMPAGNEMENT TOTAL</div>
-            <div class="course-header">
-              <div class="course-badge-level badge-red">PACK PASSERELLE ÉLITE</div>
-              <span class="course-duration"><i class="fa-regular fa-clock"></i> 6 à 9 Mois</span>
-            </div>
-            <h3 class="course-title">Pack Clé en Main : Langue (A1-B2) + Permis + Visa</h3>
-            <p class="course-summary">
-              L'offre ultime intégrant tous les niveaux de langue jusqu'au B2, la formation permis Auto-École, la constitution du dossier visa et l'assistance placement.
-            </p>
-            <div class="course-schedule-tag">
-              <i class="fa-solid fa-shield-halved"></i> Suivi VIP avec tuteur dédié
-            </div>
-            <div class="course-price-box">
-              <span class="price-val">Sur Mesure</span>
-              <span class="price-cur">Calcul via Simulateur</span>
-            </div>
-            <button type="button" class="btn-course-enroll btn-pack-enroll open-enroll-modal" data-course="Pack Passerelle Élite Clé en Main">
-              <span>Configurer mon Pack <i class="fa-solid fa-arrow-right"></i></span>
-            </button>
-          </div>
-
-        </div>
-
+        <ol class="steps">
+          <li class="step">
+            <span class="step-num" aria-hidden="true">1</span>
+            <h3 class="step-title">Apprendre la langue et passer le permis</h3>
+            <p class="step-text">Cours intensifs de A1 à B2 avec des enseignants certifiés. En parallèle, code et conduite à l'Auto-École GCONNECT.</p>
+            <ul class="step-list">
+              <li>Cours du matin ou du soir</li>
+              <li>Conduite en double commande</li>
+              <li>Vocabulaire professionnel allemand</li>
+            </ul>
+          </li>
+          <li class="step">
+            <span class="step-num" aria-hidden="true">2</span>
+            <h3 class="step-title">Obtenir la certification officielle</h3>
+            <p class="step-text">Entraînement en salle multimédia aux épreuves Goethe, TELC ou ÖSD, phonétique et simulations d'entretien d'embauche.</p>
+            <ul class="step-list">
+              <li>Examens blancs chronométrés</li>
+              <li>Inscription aux sessions officielles</li>
+              <li>Objectif : 98&nbsp;% de réussite</li>
+            </ul>
+          </li>
+          <li class="step">
+            <span class="step-num" aria-hidden="true">3</span>
+            <h3 class="step-title">Contrat, visa et installation</h3>
+            <p class="step-text">Mise en relation avec nos partenaires en Allemagne (soins infirmiers, informatique, hôtellerie, métiers techniques), dépôt du visa et accueil.</p>
+            <ul class="step-list">
+              <li>Contrat de travail ou de formation</li>
+              <li>Préparation à l'entretien à l'ambassade</li>
+              <li>Logement et intégration</li>
+            </ul>
+          </li>
+        </ol>
       </div>
     </section>
 
-    <!-- ==========================================================================
-         7. SIMULATEUR DE BUDGET & DÉMARCHES ALLEMAGNE
-         ========================================================================== -->
-    <section class="section-simulator" id="simulateur">
+    <!-- ============ FORMATIONS & TARIFS ============ -->
+    <section class="section section-alt" id="formations">
       <div class="container">
-        
-        <div class="section-header-academic">
-          <div class="section-tag-row">
-            <span class="academic-tag">05 // OUTIL INTERACTIF</span>
-            <span class="academic-flag-stripe"></span>
-          </div>
-          <h2 class="academic-title">Simulateur de Budget &amp; <em class="serif-accent">Projet Allemagne.</em></h2>
-          <p class="academic-subtitle">
-            Estimez instantanément le coût prévisionnel de vos formations, de votre permis et des démarches administratives pour concrétiser votre départ.
-          </p>
+        <header class="section-head">
+          <h2 class="section-title">Formations <em>et tarifs.</em></h2>
+          <p class="section-lead">Prix en francs CFA, supports pédagogiques, accès à la salle informatique et examens blancs compris. Paiement en plusieurs tranches possible.</p>
+        </header>
+
+        <div class="filters" role="group" aria-label="Filtrer les formations">
+          <button type="button" class="filter-tab active" data-filter="all" aria-pressed="true">Tout</button>
+          <button type="button" class="filter-tab" data-filter="langue" aria-pressed="false">Allemand A1–C1</button>
+          <button type="button" class="filter-tab" data-filter="autoecole" aria-pressed="false">Auto-École</button>
+          <button type="button" class="filter-tab" data-filter="pack" aria-pressed="false">Pack complet</button>
         </div>
 
-        <div class="simulator-card-box">
-          <div class="simulator-controls-col">
-            
-            <!-- Choix Niveaux de Langue -->
-            <div class="sim-group">
-              <label class="sim-label"><i class="fa-solid fa-layer-group"></i> 1. Sélectionnez les niveaux de langue souhaités :</label>
-              <div class="sim-checkbox-grid">
-                <label class="sim-check-card">
-                  <input type="checkbox" name="simLevel" value="100000" id="simLvlA1" checked>
-                  <span class="check-box-inner">
-                    <span class="check-title">Niveau A1</span>
-                    <span class="check-price">100 000 FCFA</span>
-                  </span>
-                </label>
-                <label class="sim-check-card">
-                  <input type="checkbox" name="simLevel" value="110000" id="simLvlA2" checked>
-                  <span class="check-box-inner">
-                    <span class="check-title">Niveau A2</span>
-                    <span class="check-price">110 000 FCFA</span>
-                  </span>
-                </label>
-                <label class="sim-check-card">
-                  <input type="checkbox" name="simLevel" value="130000" id="simLvlB1" checked>
-                  <span class="check-box-inner">
-                    <span class="check-title">Niveau B1</span>
-                    <span class="check-price">130 000 FCFA</span>
-                  </span>
-                </label>
-                <label class="sim-check-card">
-                  <input type="checkbox" name="simLevel" value="140000" id="simLvlB2">
-                  <span class="check-box-inner">
-                    <span class="check-title">Niveau B2</span>
-                    <span class="check-price">140 000 FCFA</span>
-                  </span>
-                </label>
-                <label class="sim-check-card">
-                  <input type="checkbox" name="simLevel" value="150000" id="simLvlC1">
-                  <span class="check-box-inner">
-                    <span class="check-title">Niveau C1</span>
-                    <span class="check-price">150 000 FCFA</span>
-                  </span>
-                </label>
-              </div>
+        <ul class="tariff-list" id="formationsGrid">
+          <li class="course" data-category="langue">
+            <span class="course-level">A1</span>
+            <div class="course-main">
+              <h3 class="course-title">Allemand général — Débutant</h3>
+              <p class="course-text">Bases de la grammaire, prononciation et premiers échanges du quotidien.</p>
             </div>
+            <dl class="course-meta">
+              <div><dt>Durée</dt><dd>8 semaines</dd></div>
+              <div><dt>Horaires</dt><dd>08h–11h ou 17h–20h</dd></div>
+            </dl>
+            <div class="course-price"><span class="price">100 000</span><span class="price-unit">FCFA / session</span></div>
+            <button type="button" class="btn btn-outline open-enroll-modal" data-course="Allemand Niveau A1 (100 000 FCFA)">S'inscrire</button>
+          </li>
 
-            <!-- Option Auto-École -->
-            <div class="sim-group">
-              <label class="sim-label"><i class="fa-solid fa-car"></i> 2. Ajouter la formation Auto-École GCONNECT :</label>
-              <div class="sim-radio-row">
-                <label class="sim-radio-card">
-                  <input type="radio" name="simDriving" value="70000" id="simDriveYes" checked>
-                  <span class="radio-box-inner">
-                    <span class="radio-title">Permis B Double Commande</span>
-                    <span class="radio-price">+70 000 FCFA</span>
-                  </span>
-                </label>
-                <label class="sim-radio-card">
-                  <input type="radio" name="simDriving" value="0" id="simDriveNo">
-                  <span class="radio-box-inner">
-                    <span class="radio-title">Non, pas pour le moment</span>
-                    <span class="radio-price">0 FCFA</span>
-                  </span>
-                </label>
-              </div>
+          <li class="course" data-category="langue">
+            <span class="course-level">A2</span>
+            <div class="course-main">
+              <h3 class="course-title">Allemand général — Élémentaire</h3>
+              <p class="course-text">Phrases plus complexes, compréhension écrite approfondie et expression spontanée.</p>
             </div>
+            <dl class="course-meta">
+              <div><dt>Durée</dt><dd>8 semaines</dd></div>
+              <div><dt>Horaires</dt><dd>08h–11h ou 17h–20h</dd></div>
+            </dl>
+            <div class="course-price"><span class="price">110 000</span><span class="price-unit">FCFA / session</span></div>
+            <button type="button" class="btn btn-outline open-enroll-modal" data-course="Allemand Niveau A2 (110 000 FCFA)">S'inscrire</button>
+          </li>
 
-            <!-- Option Accompagnement Visa & Placement -->
-            <div class="sim-group">
-              <label class="sim-label"><i class="fa-solid fa-passport"></i> 3. Module d'Accompagnement Visa &amp; Dossier :</label>
-              <select id="simVisaSelect" class="sim-select-styled">
-                <option value="0">Aucun accompagnement supplémentaire (0 FCFA)</option>
-                <option value="50000" selected>Coaching Entretien Visa + Traduction de documents (50 000 FCFA)</option>
-                <option value="150000">Passerelle Complète Ausbildung / Emploi &amp; Recherche Logement (150 000 FCFA)</option>
-              </select>
+          <li class="course is-featured" data-category="langue">
+            <span class="course-level">B1</span>
+            <div class="course-main">
+              <span class="course-badge">Niveau exigé pour l'Ausbildung et le visa</span>
+              <h3 class="course-title">Allemand certifiant — Intermédiaire</h3>
+              <p class="course-text">Le niveau clé des contrats d'apprentissage et des visas d'études. Simulations Goethe et TELC complètes.</p>
             </div>
+            <dl class="course-meta">
+              <div><dt>Durée</dt><dd>10 semaines</dd></div>
+              <div><dt>Horaires</dt><dd>Matin, après-midi ou soir</dd></div>
+            </dl>
+            <div class="course-price"><span class="price">130 000</span><span class="price-unit">FCFA / session</span></div>
+            <button type="button" class="btn btn-primary open-enroll-modal" data-course="Allemand Niveau B1 (130 000 FCFA)">S'inscrire</button>
+          </li>
 
-          </div>
-
-          <!-- Colonne Résumé & Devis Instantané -->
-          <div class="simulator-summary-col">
-            <div class="summary-header">
-              <span class="sum-tag">SYNTHÈSE DEVIS ESTIMATIF</span>
-              <h3 class="sum-title">Votre Budget Formation</h3>
+          <li class="course" data-category="langue">
+            <span class="course-level">B2</span>
+            <div class="course-main">
+              <h3 class="course-title">Allemand professionnel — Avancé</h3>
+              <p class="course-text">Requis pour les professions médicales, les ingénieurs et l'entrée directe à l'université.</p>
             </div>
+            <dl class="course-meta">
+              <div><dt>Durée</dt><dd>10 semaines</dd></div>
+              <div><dt>Horaires</dt><dd>08h–11h ou 17h–20h</dd></div>
+            </dl>
+            <div class="course-price"><span class="price">140 000</span><span class="price-unit">FCFA / session</span></div>
+            <button type="button" class="btn btn-outline open-enroll-modal" data-course="Allemand Niveau B2 (140 000 FCFA)">S'inscrire</button>
+          </li>
 
-            <div class="summary-breakdown" id="simBreakdownList">
-              <div class="breakdown-row">
-                <span class="item-name">Niveaux d'allemand (A1 + A2 + B1)</span>
-                <span class="item-val" id="sumLangVal">340 000 FCFA</span>
-              </div>
-              <div class="breakdown-row">
-                <span class="item-name">Auto-École GCONNECT (Permis B)</span>
-                <span class="item-val" id="sumDriveVal">70 000 FCFA</span>
-              </div>
-              <div class="breakdown-row">
-                <span class="item-name">Accompagnement Visa &amp; Dossier</span>
-                <span class="item-val" id="sumVisaVal">50 000 FCFA</span>
-              </div>
-              <div class="breakdown-divider"></div>
-              <div class="breakdown-total-row">
-                <span class="total-label">TOTAL PRÉVISIONNEL</span>
-                <span class="total-amount" id="simTotalAmount">460 000 FCFA</span>
-              </div>
+          <li class="course" data-category="langue">
+            <span class="course-level">C1</span>
+            <div class="course-main">
+              <h3 class="course-title">Allemand supérieur — Expert</h3>
+              <p class="course-text">Maîtrise fluide pour les études spécialisées, la recherche et les carrières de haut niveau.</p>
             </div>
+            <dl class="course-meta">
+              <div><dt>Durée</dt><dd>10 à 12 semaines</dd></div>
+              <div><dt>Horaires</dt><dd>08h–11h ou 17h–20h</dd></div>
+            </dl>
+            <div class="course-price"><span class="price">150 000</span><span class="price-unit">FCFA / session</span></div>
+            <button type="button" class="btn btn-outline open-enroll-modal" data-course="Allemand Niveau C1 (150 000 FCFA)">S'inscrire</button>
+          </li>
 
-            <div class="summary-actions">
-              <button type="button" class="btn-magnetic btn-brand-red w-full" id="btnSendSimToWhatsApp">
-                <span class="btn-inner-text"><i class="fa-brands fa-whatsapp"></i> Valider ce devis sur WhatsApp</span>
-              </button>
-              <p class="summary-note">
-                <i class="fa-solid fa-circle-info"></i> Estimation indicative sans engagement. Facilités de paiement par tranches disponibles au secrétariat.
-              </p>
+          <li class="course" data-category="autoecole">
+            <span class="course-level course-level-icon"><i class="fa-solid fa-car" aria-hidden="true"></i><span class="sr-only">Permis B</span></span>
+            <div class="course-main">
+              <h3 class="course-title">Auto-École GCONNECT — Permis B</h3>
+              <p class="course-text">Code de la route, conduite sur véhicules récents à double commande et passage de l'examen officiel.</p>
             </div>
-          </div>
+            <dl class="course-meta">
+              <div><dt>Durée</dt><dd>6 à 8 semaines</dd></div>
+              <div><dt>Horaires</dt><dd>Séances flexibles</dd></div>
+            </dl>
+            <div class="course-price"><span class="price">70 000</span><span class="price-unit">FCFA, tout inclus</span></div>
+            <button type="button" class="btn btn-outline open-enroll-modal" data-course="Auto-École GCONNECT Permis B (70 000 FCFA)">Réserver</button>
+          </li>
 
-        </div>
-
+          <li class="course is-pack" data-category="pack">
+            <span class="course-level course-level-icon"><i class="fa-solid fa-plane-departure" aria-hidden="true"></i><span class="sr-only">Pack</span></span>
+            <div class="course-main">
+              <span class="course-badge">Accompagnement complet</span>
+              <h3 class="course-title">Pack Passerelle : langue A1–B2 + permis + visa</h3>
+              <p class="course-text">Tous les niveaux jusqu'au B2, le permis à l'Auto-École, le dossier de visa et l'aide au placement, avec un tuteur dédié.</p>
+            </div>
+            <dl class="course-meta">
+              <div><dt>Durée</dt><dd>6 à 9 mois</dd></div>
+              <div><dt>Suivi</dt><dd>Tuteur dédié</dd></div>
+            </dl>
+            <div class="course-price"><span class="price price-text">Sur mesure</span><a href="#simulateur" class="price-unit price-link">Estimer avec le simulateur</a></div>
+            <button type="button" class="btn btn-primary open-enroll-modal" data-course="Pack Passerelle Élite (Langue + Permis + Visa)">Configurer</button>
+          </li>
+        </ul>
       </div>
     </section>
 
-    <!-- ==========================================================================
-         8. TEST DE NIVEAU EXPRESS D'ALLEMAND (INTERACTIF)
-         ========================================================================== -->
-    <section class="section-quiz" id="quiz">
+    <!-- ============ SIMULATEUR ============ -->
+    <section class="section" id="simulateur">
       <div class="container">
-        
-        <div class="section-header-academic">
-          <div class="section-tag-row">
-            <span class="academic-tag">06 // TEST EN LIGNE IMMÉDIAT</span>
-            <span class="academic-flag-stripe"></span>
-          </div>
-          <h2 class="academic-title">Évaluez Votre Niveau d'Allemand <em class="serif-accent">en 3 Minutes.</em></h2>
-          <p class="academic-subtitle">
-            Répondez aux 6 questions interactives ci-dessous pour obtenir une recommandation personnalisée de cours adaptée à vos acquis.
-          </p>
+        <header class="section-head">
+          <h2 class="section-title">Estimez votre budget <em>en une minute.</em></h2>
+          <p class="section-lead">Cochez ce dont vous avez besoin. Le total se met à jour instantanément et vous pouvez nous l'envoyer sur WhatsApp.</p>
+        </header>
+
+        <div class="sim">
+          <form class="sim-form" onsubmit="return false;">
+            <fieldset class="sim-group">
+              <legend class="sim-legend"><span class="sim-step">1</span> Niveaux de langue</legend>
+              <div class="choice-grid">
+                <label class="choice"><input type="checkbox" name="simLevel" value="100000" checked><span class="choice-box"><span class="choice-title">Niveau A1</span><span class="choice-price">100 000 FCFA</span></span></label>
+                <label class="choice"><input type="checkbox" name="simLevel" value="110000" checked><span class="choice-box"><span class="choice-title">Niveau A2</span><span class="choice-price">110 000 FCFA</span></span></label>
+                <label class="choice"><input type="checkbox" name="simLevel" value="130000" checked><span class="choice-box"><span class="choice-title">Niveau B1</span><span class="choice-price">130 000 FCFA</span></span></label>
+                <label class="choice"><input type="checkbox" name="simLevel" value="140000"><span class="choice-box"><span class="choice-title">Niveau B2</span><span class="choice-price">140 000 FCFA</span></span></label>
+                <label class="choice"><input type="checkbox" name="simLevel" value="150000"><span class="choice-box"><span class="choice-title">Niveau C1</span><span class="choice-price">150 000 FCFA</span></span></label>
+              </div>
+            </fieldset>
+
+            <fieldset class="sim-group">
+              <legend class="sim-legend"><span class="sim-step">2</span> Auto-École GCONNECT</legend>
+              <div class="choice-grid choice-grid-2">
+                <label class="choice"><input type="radio" name="simDriving" value="70000" checked><span class="choice-box"><span class="choice-title">Permis B, double commande</span><span class="choice-price">+70 000 FCFA</span></span></label>
+                <label class="choice"><input type="radio" name="simDriving" value="0"><span class="choice-box"><span class="choice-title">Pas pour le moment</span><span class="choice-price">0 FCFA</span></span></label>
+              </div>
+            </fieldset>
+
+            <fieldset class="sim-group">
+              <legend class="sim-legend"><span class="sim-step">3</span> Accompagnement visa et dossier</legend>
+              <div class="select-wrap">
+                <select id="simVisaSelect" class="select" aria-label="Accompagnement visa et dossier">
+                  <option value="0">Aucun accompagnement (0 FCFA)</option>
+                  <option value="50000" selected>Coaching entretien visa + traduction (50 000 FCFA)</option>
+                  <option value="150000">Passerelle complète Ausbildung / emploi + logement (150 000 FCFA)</option>
+                </select>
+              </div>
+            </fieldset>
+          </form>
+
+          <aside class="receipt" aria-live="polite">
+            <h3 class="receipt-title">Votre estimation</h3>
+            <dl class="receipt-lines">
+              <div class="receipt-line"><dt>Cours d'allemand</dt><dd id="sumLangVal">340 000 FCFA</dd></div>
+              <div class="receipt-line"><dt>Auto-École (permis B)</dt><dd id="sumDriveVal">70 000 FCFA</dd></div>
+              <div class="receipt-line"><dt>Visa et dossier</dt><dd id="sumVisaVal">50 000 FCFA</dd></div>
+            </dl>
+            <div class="receipt-total">
+              <span>Total estimé</span>
+              <strong id="simTotalAmount">460 000 FCFA</strong>
+            </div>
+            <button type="button" class="btn btn-whatsapp btn-block btn-lg" id="btnSendSimToWhatsApp">
+              <i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Envoyer ce devis sur WhatsApp
+            </button>
+            <p class="receipt-note">Estimation indicative, sans engagement. Paiement en plusieurs tranches possible au secrétariat.</p>
+          </aside>
         </div>
-
-        <div class="quiz-interactive-card" id="quizContainer">
-          
-          <!-- Écran de Progression du Quiz -->
-          <div class="quiz-progress-bar-wrap">
-            <div class="quiz-progress-indicator" id="quizProgressIndicator" style="width: 16.66%;"></div>
-          </div>
-
-          <div class="quiz-meta-bar">
-            <span class="quiz-step-label" id="quizStepLabel">Question 1 sur 6</span>
-            <span class="quiz-difficulty-tag" id="quizDiffTag">Niveau : Débutant A1</span>
-          </div>
-
-          <!-- Conteneur Dynamique de la Question -->
-          <div class="quiz-content-area" id="quizContentArea">
-            <h3 class="quiz-question-text" id="quizQuestionText">1. Complétez la phrase : "Guten Tag, wie ______ Sie ?"</h3>
-            
-            <div class="quiz-options-list" id="quizOptionsList">
-              <button type="button" class="quiz-opt-btn" data-index="0">A) heißt</button>
-              <button type="button" class="quiz-opt-btn" data-index="1">B) heißen</button>
-              <button type="button" class="quiz-opt-btn" data-index="2">C) heiße</button>
-              <button type="button" class="quiz-opt-btn" data-index="3">D) heiße ich</button>
-            </div>
-          </div>
-
-          <!-- Écran Résultat (Masqué par défaut) -->
-          <div class="quiz-result-area" id="quizResultArea" style="display: none;">
-            <div class="result-score-circle">
-              <span class="score-num" id="resultScoreNum">5/6</span>
-              <span class="score-label">Score Obtenu</span>
-            </div>
-            <h3 class="result-title" id="resultLevelTitle">Niveau Recommandé : Allemand B1</h3>
-            <p class="result-desc" id="resultLevelDesc">
-              Vous avez d'excellentes bases grammaticales et lexicales. Vous êtes prêt(e) pour le niveau B1 afin de viser les certifications Goethe ou TELC pour votre projet d'Ausbildung !
-            </p>
-            <div class="result-actions">
-              <button type="button" class="btn-magnetic btn-brand-red open-enroll-modal" id="btnEnrollWithQuizResult" data-course="Orientation suite au Test de Niveau">
-                <span class="btn-inner-text">Réserver ma place pour ce niveau <i class="fa-solid fa-arrow-right"></i></span>
-              </button>
-              <button type="button" class="btn-secondary-retake" id="btnRestartQuiz">
-                <i class="fa-solid fa-arrow-rotate-left"></i> Recommencer le test
-              </button>
-            </div>
-          </div>
-
-        </div>
-
       </div>
     </section>
 
-    <!-- ==========================================================================
-         9. CAMPUS YAOUNDÉ NGOUSSO & CONTACT RAPIDE
-         ========================================================================== -->
-    <section class="section-campus" id="campus">
+    <!-- ============ TEST DE NIVEAU ============ -->
+    <section class="section section-alt" id="quiz">
       <div class="container">
-        
-        <div class="section-header-academic">
-          <div class="section-tag-row">
-            <span class="academic-tag">07 // INFRASTRUCTURE &amp; ACCÈS</span>
-            <span class="academic-flag-stripe"></span>
+        <div class="quiz-layout">
+          <header class="section-head quiz-head">
+            <h2 class="section-title">Quel est votre niveau <em>d'allemand ?</em></h2>
+            <p class="section-lead">Six questions, trois minutes. Vous obtenez une recommandation de cours adaptée à vos acquis.</p>
+          </header>
+
+          <div class="quiz-card" id="quizContainer">
+            <div class="quiz-progress" aria-hidden="true"><div class="quiz-progress-bar" id="quizProgressIndicator"></div></div>
+            <div class="quiz-meta">
+              <span id="quizStepLabel">Question 1 sur 6</span>
+              <span class="quiz-diff" id="quizDiffTag">Débutant A1</span>
+            </div>
+
+            <div id="quizContentArea">
+              <h3 class="quiz-question" id="quizQuestionText" tabindex="-1"></h3>
+              <div class="quiz-options" id="quizOptionsList"></div>
+            </div>
+
+            <div class="quiz-result" id="quizResultArea" hidden>
+              <div class="quiz-score"><span id="resultScoreNum">0/6</span><small>bonnes réponses</small></div>
+              <h3 class="quiz-result-title" id="resultLevelTitle" tabindex="-1"></h3>
+              <p class="quiz-result-text" id="resultLevelDesc"></p>
+              <div class="quiz-result-actions">
+                <button type="button" class="btn btn-primary open-enroll-modal" id="btnEnrollWithQuizResult" data-course="Consultation d'Orientation Gratuite">Réserver ma place <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button>
+                <button type="button" class="btn btn-ghost" id="btnRestartQuiz"><i class="fa-solid fa-rotate-left" aria-hidden="true"></i> Recommencer</button>
+              </div>
+            </div>
           </div>
-          <h2 class="academic-title">Notre Campus à Yaoundé <em class="serif-accent">Carrefour Ngousso.</em></h2>
-          <p class="academic-subtitle">
-            Un pôle moderne conçu pour l'apprentissage linguistique immersif, la conduite pratique et la constitution de dossiers administratifs.
-          </p>
         </div>
+      </div>
+    </section>
 
-        <div class="campus-layout-grid">
-          
-          <!-- Carte Informations & Coordonnées -->
-          <div class="campus-info-card">
-            <div class="info-header">
-              <h3 class="info-title">Germany Connect Institute</h3>
-              <p class="info-subtitle">Centre Linguistique &amp; Auto-École GCONNECT</p>
-            </div>
+    <!-- ============ CAMPUS & CONTACT ============ -->
+    <section class="section" id="campus">
+      <div class="container">
+        <header class="section-head">
+          <h2 class="section-title">Venez nous voir <em>à Ngousso.</em></h2>
+          <p class="section-lead">Le secrétariat vous reçoit sans rendez-vous pour une orientation gratuite.</p>
+        </header>
 
-            <div class="info-rows-list">
-              <div class="info-row-item">
-                <div class="info-icon"><i class="fa-solid fa-location-dot"></i></div>
-                <div class="info-details">
-                  <span class="row-label">Adresse Principale</span>
-                  <span class="row-val">Yaoundé, Carrefour Ngousso — En face du Complexe Médical</span>
-                </div>
-              </div>
-
-              <div class="info-row-item">
-                <div class="info-icon"><i class="fa-solid fa-clock"></i></div>
-                <div class="info-details">
-                  <span class="row-label">Horaires d'Ouverture du Secrétariat</span>
-                  <span class="row-val">Lundi au Vendredi : 07h30 – 19h00 | Samedi : 08h00 – 16h00</span>
-                </div>
-              </div>
-
-              <div class="info-row-item">
-                <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
-                <div class="info-details">
-                  <span class="row-label">Téléphone Direct (Cameroun)</span>
-                  <a href="tel:+237696005112" class="row-link">+237 696 005 112</a>
-                </div>
-              </div>
-
-              <div class="info-row-item">
-                <div class="info-icon text-gold"><i class="fa-brands fa-whatsapp"></i></div>
-                <div class="info-details">
-                  <span class="row-label">Ligne WhatsApp Support International</span>
-                  <a href="https://wa.me/491749632778?text=Bonjour%20Germany%20Connect%20Institute,%20je%20souhaite%20des%20informations" target="_blank" rel="noopener noreferrer" class="row-link link-gold">+49 174 9632778</a>
-                </div>
-              </div>
-            </div>
-
-            <div class="campus-cta-cluster">
-              <button type="button" class="btn-magnetic btn-brand-red w-full open-enroll-modal" data-course="Visite Campus Ngousso">
-                <span class="btn-inner-text"><i class="fa-solid fa-map-location-dot"></i> Prendre Rendez-vous au Campus</span>
-              </button>
-            </div>
+        <div class="campus">
+          <div class="campus-photos">
+            <figure class="campus-main">
+              <img src="assets/campus-entrance.jpg" alt="Entrée et accueil du campus Germany Connect Institute" width="1024" height="768" loading="lazy">
+            </figure>
+            <figure class="campus-thumb">
+              <img src="assets/red-car-driving.jpg" alt="Véhicule de l'Auto-École GCONNECT en circulation" width="1024" height="768" loading="lazy">
+              <figcaption>Auto-École GCONNECT</figcaption>
+            </figure>
+            <figure class="campus-thumb">
+              <img src="assets/auto-ecole-car-rear.jpg" alt="Arrière d'un véhicule de l'Auto-École GCONNECT" width="1024" height="768" loading="lazy">
+              <figcaption>Véhicules double commande</figcaption>
+            </figure>
           </div>
 
-          <!-- Galerie Photos du Campus -->
-          <div class="campus-gallery-card">
-            <div class="gallery-main-image" style="background-image: url('assets/campus-entrance-2.jpg');" role="img" aria-label="Façade du campus Germany Connect Institute à Ngousso">
-              <div class="gallery-tag"><i class="fa-solid fa-building-columns"></i> Campus Ngousso</div>
-            </div>
-
-            <div class="gallery-thumbs-row">
-              <div class="thumb-cell" style="background-image: url('assets/red-car-driving.jpg');" role="img" aria-label="Véhicule Auto-École GCONNECT">
-                <span class="thumb-label">Auto-École</span>
+          <div class="contact">
+            <dl class="contact-list">
+              <div class="contact-row">
+                <dt><i class="fa-solid fa-location-dot" aria-hidden="true"></i> Adresse</dt>
+                <dd>Yaoundé, Carrefour Ngousso<br>En face du Complexe Médical</dd>
               </div>
-              <div class="thumb-cell" style="background-image: url('assets/campus-entrance.jpg');" role="img" aria-label="Entrée et accueil du Campus Germany Connect">
-                <span class="thumb-label">Accueil &amp; Campus</span>
+              <div class="contact-row">
+                <dt><i class="fa-regular fa-clock" aria-hidden="true"></i> Horaires</dt>
+                <dd>Lundi – vendredi : 07h30 – 19h00<br>Samedi : 08h00 – 16h00</dd>
               </div>
+              <div class="contact-row">
+                <dt><i class="fa-solid fa-phone" aria-hidden="true"></i> Téléphone</dt>
+                <dd><a href="tel:+237696005112">+237 696 005 112</a></dd>
+              </div>
+              <div class="contact-row">
+                <dt><i class="fa-solid fa-envelope" aria-hidden="true"></i> E-mail</dt>
+                <dd><a href="mailto:germanyconnectinstitut@gmail.com">germanyconnectinstitut@gmail.com</a></dd>
+              </div>
+              <div class="contact-row">
+                <dt><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> WhatsApp</dt>
+                <dd><a href="https://wa.me/491749632778?text=Bonjour%20Germany%20Connect%20Institute,%20je%20souhaite%20des%20informations" target="_blank" rel="noopener noreferrer">+49 174 9632778</a></dd>
+              </div>
+              <div class="contact-row">
+                <dt><i class="fa-brands fa-tiktok" aria-hidden="true"></i> TikTok</dt>
+                <dd><a href="https://www.tiktok.com/@germanyconnectinstitut" target="_blank" rel="noopener noreferrer">@germanyconnectinstitut</a></dd>
+              </div>
+            </dl>
+            <div class="contact-actions">
+              <button type="button" class="btn btn-primary btn-block btn-lg open-enroll-modal" data-course="Consultation d'Orientation Gratuite">Prendre rendez-vous</button>
+              <a href="https://www.google.com/maps/search/?api=1&amp;query=Carrefour+Ngousso+Yaound%C3%A9" target="_blank" rel="noopener noreferrer" class="btn btn-ghost btn-block"><i class="fa-solid fa-map-location-dot" aria-hidden="true"></i> Itinéraire Google Maps</a>
             </div>
           </div>
-
         </div>
-
       </div>
     </section>
 
   </main>
 
-  <!-- ==========================================================================
-       10. PIED DE PAGE INSTITUTIONNEL
-       ========================================================================== -->
+  <!-- ============ PIED DE PAGE ============ -->
   <footer class="site-footer">
-    <div class="container footer-container">
-      
-      <div class="footer-top-row">
-        <!-- Logo & Présentation -->
-        <div class="footer-brand-col">
-          <div class="brand-logo-pill footer-logo">
-            <div class="logo-circle-wrap">
-              <svg class="official-logo-svg" viewBox="0 0 100 100" fill="none" style="width:34px;height:34px;" aria-hidden="true">
-                <path d="M 50 12 C 73 12, 90 28, 90 48 C 90 62, 80 75, 68 82 C 64 84, 58 80, 60 75 C 68 70, 75 60, 75 48 C 75 35, 63 24, 50 24 C 33 24, 20 38, 20 54 C 20 70, 33 84, 50 84 C 54 84, 56 89, 53 92 C 48 95, 42 96, 36 94 C 16 88, 5 70, 5 50 C 5 28, 24 12, 50 12 Z" fill="#E63946"/>
-                <path d="M 48 28 C 60 28, 70 37, 70 49 C 70 54, 66 56, 62 56 L 48 56 C 45 56, 43 54, 43 51 C 43 48, 45 46, 48 46 L 58 46 C 56 40, 52 38, 48 38 C 40 38, 32 44, 32 52 C 32 60, 40 68, 48 68 C 54 68, 58 64, 60 60 C 62 56, 68 58, 67 63 C 63 72, 56 78, 48 78 C 33 78, 22 66, 22 52 C 22 38, 33 28, 48 28 Z" fill="#FFB703"/>
-              </svg>
-            </div>
-            <div class="brand-text-block">
-              <div class="brand-line">
-                <span class="brand-word-dark">GERMANY</span>
-                <span class="brand-word-red">CONNECT</span>
-              </div>
-              <span class="brand-tagline">INSTITUTE</span>
-            </div>
-          </div>
-          <p class="footer-summary">
-            Institut linguistique d'excellence A1-C1 et Auto-École GCONNECT à Yaoundé Ngousso. La passerelle de référence vers les études, formations (Ausbildung) et carrières en Allemagne.
-          </p>
-          <div class="system-status-indicator">
-            <span class="status-pulse-dot"></span>
-            <span class="status-text-mono">SYSTÈME OPÉRATIONNEL // INSCRIPTIONS ACTIVES</span>
-          </div>
-        </div>
-
-        <!-- Liens Programmes -->
-        <div class="footer-links-col">
-          <h4 class="footer-col-title">Programmes de Langue</h4>
-          <ul class="footer-links-list">
-            <li><a href="#formations">Allemand Débutant A1 &amp; A2</a></li>
-            <li><a href="#formations">Allemand Intermédiaire B1 Certifiant</a></li>
-            <li><a href="#formations">Allemand Médical &amp; Pro B2-C1</a></li>
-            <li><a href="#atouts">Préparation TELC, Goethe &amp; ÖSD</a></li>
-            <li><a href="#quiz">Test de Niveau d'Allemand en Ligne</a></li>
-          </ul>
-        </div>
-
-        <!-- Liens Auto-École & Passerelle -->
-        <div class="footer-links-col">
-          <h4 class="footer-col-title">Pôles &amp; Services</h4>
-          <ul class="footer-links-list">
-            <li><a href="#formations">Auto-École GCONNECT (Permis B)</a></li>
-            <li><a href="#protocole">Accompagnement Contrats Ausbildung</a></li>
-            <li><a href="#simulateur">Simulateur de Coût Projet Allemagne</a></li>
-            <li><a href="#campus">Campus Ngousso &amp; Contact</a></li>
-            <li><button type="button" class="footer-link-btn open-brochure-modal">Télécharger la Brochure 2026</button></li>
-          </ul>
-        </div>
-
-        <!-- Contact & Ligne Directe -->
-        <div class="footer-contact-col">
-          <h4 class="footer-col-title">Contact Rapide</h4>
-          <p class="footer-contact-text"><i class="fa-solid fa-location-dot"></i> Yaoundé, Carrefour Ngousso</p>
-          <p class="footer-contact-text"><i class="fa-solid fa-phone"></i> +237 696 005 112</p>
-          <p class="footer-contact-text text-gold"><i class="fa-brands fa-whatsapp"></i> +49 174 9632778</p>
-          <div class="footer-cta-wrapper">
-            <button type="button" class="btn-magnetic btn-brand-red w-full open-enroll-modal" data-course="Inscription Pied de Page">
-              <span class="btn-inner-text">S'inscrire Maintenant <i class="fa-solid fa-arrow-right"></i></span>
-            </button>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Ligne Inférieure Mentions Légales & CGU -->
-      <div class="footer-bottom-row">
-        <p class="footer-copyright">
-          &copy; 2026 GERMANY CONNECT INSTITUTE. Tous droits réservés. Pôle linguistique &amp; Auto-École GCONNECT agréés.
-        </p>
-        <div class="footer-legal-links">
-          <button type="button" class="legal-link-btn open-cgu-modal">Conditions Générales (CGU / CGV)</button>
-          <span class="legal-sep">•</span>
-          <button type="button" class="legal-link-btn open-privacy-modal">Politique de Confidentialité</button>
+    <div class="container">
+      <div class="footer-cta">
+        <h2 class="footer-cta-title">Votre projet Allemagne <em>commence par un échange.</em></h2>
+        <div class="footer-cta-actions">
+          <button type="button" class="btn btn-primary btn-lg open-enroll-modal" data-course="Consultation d'Orientation Gratuite">S'inscrire maintenant</button>
+          <button type="button" class="btn btn-on-ink btn-lg open-brochure-modal"><i class="fa-regular fa-file-pdf" aria-hidden="true"></i> Recevoir la brochure 2026</button>
         </div>
       </div>
 
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <img class="footer-logo" src="assets/logo-germany-connect-white.png" alt="Germany Connect" width="2238" height="889" loading="lazy">
+          <p>Cours d'allemand A1–C1 et Auto-École GCONNECT à Yaoundé Ngousso. Votre passerelle vers les études, l'Ausbildung et l'emploi en Allemagne.</p>
+          <div class="socials">
+            <a href="https://www.tiktok.com/@germanyconnectinstitut" target="_blank" rel="noopener noreferrer" aria-label="TikTok @germanyconnectinstitut"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a>
+            <a href="https://wa.me/491749632778" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
+            <a href="tel:+237696005112" aria-label="Téléphone +237 696 005 112"><i class="fa-solid fa-phone" aria-hidden="true"></i></a>
+            <a href="mailto:germanyconnectinstitut@gmail.com" aria-label="E-mail germanyconnectinstitut@gmail.com"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>
+          </div>
+          <p class="footer-status"><span class="status-dot" aria-hidden="true"></span> Inscriptions 2026 ouvertes</p>
+        </div>
+
+        <div>
+          <h3 class="footer-title">Cours d'allemand</h3>
+          <ul class="footer-links">
+            <li><a href="#formations">Débutant A1 et A2</a></li>
+            <li><a href="#formations">Intermédiaire B1 certifiant</a></li>
+            <li><a href="#formations">Professionnel B2 et C1</a></li>
+            <li><a href="#poles">Préparation Goethe, TELC, ÖSD</a></li>
+            <li><a href="#quiz">Test de niveau en ligne</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="footer-title">Services</h3>
+          <ul class="footer-links">
+            <li><a href="#formations">Auto-École GCONNECT</a></li>
+            <li><a href="#parcours">Contrats d'Ausbildung</a></li>
+            <li><a href="#simulateur">Simulateur de budget</a></li>
+            <li><button type="button" class="open-brochure-modal">Brochure 2026</button></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="footer-title">Contact</h3>
+          <ul class="footer-links">
+            <li>Yaoundé, Carrefour Ngousso</li>
+            <li><a href="tel:+237696005112">+237 696 005 112</a></li>
+            <li><a href="mailto:germanyconnectinstitut@gmail.com">germanyconnectinstitut@gmail.com</a></li>
+            <li><a href="https://wa.me/491749632778" target="_blank" rel="noopener noreferrer">WhatsApp +49 174 9632778</a></li>
+            <li><a href="https://www.tiktok.com/@germanyconnectinstitut" target="_blank" rel="noopener noreferrer">TikTok @germanyconnectinstitut</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Germany Connect Institute. Tous droits réservés.</p>
+        <div class="footer-legal">
+          <button type="button" class="open-cgu-modal">Conditions générales</button>
+          <button type="button" class="open-privacy-modal">Confidentialité</button>
+        </div>
+      </div>
     </div>
   </footer>
 
-  <!-- ==========================================================================
-       11. MODALES INTERACTIVES & ACCESSIBLES
-       ========================================================================== -->
+  <!-- Bouton WhatsApp flottant -->
+  <a class="wa-float" href="https://wa.me/491749632778?text=Bonjour%20Germany%20Connect%20Institute,%20je%20souhaite%20des%20renseignements" target="_blank" rel="noopener noreferrer" aria-label="Nous écrire sur WhatsApp">
+    <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+  </a>
 
-  <!-- Modal 1 : Inscription & Réservation de Consultation -->
-  <div class="modal-backdrop" id="enrollModal" aria-hidden="true" role="dialog" aria-labelledby="enrollModalTitle">
-    <div class="modal-dialog-panel">
-      <div class="modal-header">
-        <div class="modal-title-wrap">
-          <span class="modal-badge-tag">RÉSERVATION // SESSIONS 2026</span>
-          <h3 class="modal-main-title" id="enrollModalTitle">Inscription &amp; Consultation d'Orientation</h3>
+  <!-- ============ MODALES ============ -->
+  <div class="modal" id="enrollModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="enrollModalTitle">
+    <div class="modal-panel">
+      <div class="modal-head">
+        <div>
+          <h2 class="modal-title" id="enrollModalTitle">Inscription et consultation</h2>
+          <p class="modal-sub">Remplissez le formulaire : votre demande s'ouvre dans WhatsApp, prête à être envoyée.</p>
         </div>
-        <button type="button" class="modal-close-btn" data-close-modal aria-label="Fermer la modal">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
+        <button type="button" class="icon-btn" data-close-modal aria-label="Fermer"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
       </div>
 
-      <form class="modal-form-body" id="enrollForm">
-        <div class="form-row-dual">
-          <div class="form-field">
-            <label for="enrollFullName">Nom &amp; Prénom <span class="required-star">*</span></label>
-            <input type="text" id="enrollFullName" name="fullName" placeholder="Ex: Jean Paul Kamga" required>
+      <form class="form" id="enrollForm">
+        <div class="form-row">
+          <div class="field">
+            <label for="enrollFullName">Nom et prénom <span class="req" aria-hidden="true">*</span></label>
+            <input type="text" id="enrollFullName" name="fullName" autocomplete="name" placeholder="Ex. Jean Paul Kamga" required>
           </div>
-          <div class="form-field">
-            <label for="enrollPhone">Numéro WhatsApp / Téléphone <span class="required-star">*</span></label>
-            <input type="tel" id="enrollPhone" name="phone" placeholder="Ex: +237 696 00 00 00" required>
+          <div class="field">
+            <label for="enrollPhone">WhatsApp ou téléphone <span class="req" aria-hidden="true">*</span></label>
+            <input type="tel" id="enrollPhone" name="phone" autocomplete="tel" inputmode="tel" placeholder="Ex. +237 696 00 00 00" required>
           </div>
         </div>
-
-        <div class="form-row-dual">
-          <div class="form-field">
-            <label for="enrollEmail">Adresse Email</label>
-            <input type="email" id="enrollEmail" name="email" placeholder="votre.email@domaine.com">
+        <div class="form-row">
+          <div class="field">
+            <label for="enrollEmail">Email</label>
+            <input type="email" id="enrollEmail" name="email" autocomplete="email" placeholder="vous@exemple.com">
           </div>
-          <div class="form-field">
-            <label for="enrollProgram">Programme Souhaité <span class="required-star">*</span></label>
-            <select id="enrollProgram" name="program" required>
-              <option value="Allemand Niveau A1 (100 000 FCFA)">Allemand Niveau A1 (100 000 FCFA)</option>
-              <option value="Allemand Niveau A2 (110 000 FCFA)">Allemand Niveau A2 (110 000 FCFA)</option>
-              <option value="Allemand Niveau B1 (130 000 FCFA)">Allemand Niveau B1 (130 000 FCFA)</option>
-              <option value="Allemand Niveau B2 (140 000 FCFA)">Allemand Niveau B2 (140 000 FCFA)</option>
-              <option value="Allemand Niveau C1 (150 000 FCFA)">Allemand Niveau C1 (150 000 FCFA)</option>
-              <option value="Auto-École GCONNECT Permis B (70 000 FCFA)">Auto-École GCONNECT Permis B (70 000 FCFA)</option>
-              <option value="Pack Passerelle Élite (Langue + Permis + Visa)">Pack Passerelle Élite (Langue + Permis + Visa)</option>
-              <option value="Consultation d'Orientation Gratuite">Consultation d'Orientation Gratuite au Campus</option>
+          <div class="field">
+            <label for="enrollProgram">Programme souhaité <span class="req" aria-hidden="true">*</span></label>
+            <div class="select-wrap">
+              <select id="enrollProgram" name="program" class="select" required>
+                <option value="Consultation d'Orientation Gratuite">Consultation d'orientation gratuite</option>
+                <option value="Allemand Niveau A1 (100 000 FCFA)">Allemand A1 (100 000 FCFA)</option>
+                <option value="Allemand Niveau A2 (110 000 FCFA)">Allemand A2 (110 000 FCFA)</option>
+                <option value="Allemand Niveau B1 (130 000 FCFA)">Allemand B1 (130 000 FCFA)</option>
+                <option value="Allemand Niveau B2 (140 000 FCFA)">Allemand B2 (140 000 FCFA)</option>
+                <option value="Allemand Niveau C1 (150 000 FCFA)">Allemand C1 (150 000 FCFA)</option>
+                <option value="Auto-École GCONNECT Permis B (70 000 FCFA)">Auto-École, permis B (70 000 FCFA)</option>
+                <option value="Pack Passerelle Élite (Langue + Permis + Visa)">Pack Passerelle (langue + permis + visa)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="field">
+          <label for="enrollSchedule">Créneau préféré</label>
+          <div class="select-wrap">
+            <select id="enrollSchedule" name="schedule" class="select">
+              <option value="Matin (08h00 - 11h00)">Matin (08h00 – 11h00)</option>
+              <option value="Après-midi (13h00 - 16h00)">Après-midi (13h00 – 16h00)</option>
+              <option value="Soir (17h00 - 20h00)">Soir (17h00 – 20h00)</option>
+              <option value="Week-end (Samedi Intensif)">Samedi intensif</option>
             </select>
           </div>
         </div>
-
-        <div class="form-field">
-          <label for="enrollSchedule">Créneau Horaire Préféré</label>
-          <select id="enrollSchedule" name="schedule">
-            <option value="Matin (08h00 - 11h00)">Session du Matin (08h00 - 11h00)</option>
-            <option value="Après-midi (13h00 - 16h00)">Session de l'Après-midi (13h00 - 16h00)</option>
-            <option value="Soir (17h00 - 20h00)">Session du Soir (17h00 - 20h00)</option>
-            <option value="Week-end (Samedi Intensif)">Session du Week-end (Samedi)</option>
-          </select>
+        <div class="field">
+          <label for="enrollMessage">Votre projet (facultatif)</label>
+          <textarea id="enrollMessage" name="message" rows="3" placeholder="Ex. Ausbildung en soins infirmiers, études d'ingénierie, permis déjà commencé…"></textarea>
         </div>
-
-        <div class="form-field">
-          <label for="enrollMessage">Précisions sur votre projet (Facultatif)</label>
-          <textarea id="enrollMessage" name="message" rows="3" placeholder="Ex: Projet Ausbildung en soins infirmiers, études d'ingénierie, permis déjà commencé..."></textarea>
-        </div>
-
-        <div class="form-submit-row">
-          <button type="submit" class="btn-magnetic btn-brand-red w-full">
-            <span class="btn-inner-text">Confirmer &amp; Transmettre via WhatsApp <i class="fa-brands fa-whatsapp"></i></span>
-          </button>
-        </div>
-
-        <p class="form-secure-notice">
-          <i class="fa-solid fa-lock"></i> Vos coordonnées restent strictement confidentielles et ne sont jamais cédées à des tiers.
-        </p>
+        <button type="submit" class="btn btn-whatsapp btn-block btn-lg"><i class="fa-brands fa-whatsapp" aria-hidden="true"></i> Envoyer via WhatsApp</button>
+        <p class="form-note"><i class="fa-solid fa-lock" aria-hidden="true"></i> Vos coordonnées restent confidentielles et ne sont jamais cédées à des tiers.</p>
       </form>
     </div>
   </div>
 
-  <!-- Modal 2 : Téléchargement de la Brochure 2026 -->
-  <div class="modal-backdrop" id="brochureModal" aria-hidden="true" role="dialog" aria-labelledby="brochureModalTitle">
-    <div class="modal-dialog-panel modal-brochure-panel">
-      <div class="modal-header">
-        <div class="modal-title-wrap">
-          <span class="modal-badge-tag tag-gold">CATALOGUE OFFICIEL</span>
-          <h3 class="modal-main-title" id="brochureModalTitle">Brochure Programmes &amp; Tarifs 2026</h3>
+  <div class="modal" id="brochureModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="brochureModalTitle">
+    <div class="modal-panel modal-sm">
+      <div class="modal-head">
+        <div>
+          <h2 class="modal-title" id="brochureModalTitle">Brochure 2026</h2>
+          <p class="modal-sub">Calendrier des sessions, programme détaillé A1 à C1, Auto-École et démarches pour l'Allemagne. Nous vous l'envoyons en PDF sur WhatsApp.</p>
         </div>
-        <button type="button" class="modal-close-btn" data-close-modal aria-label="Fermer la modal">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
+        <button type="button" class="icon-btn" data-close-modal aria-label="Fermer"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
       </div>
-
-      <div class="brochure-modal-body">
-        <div class="brochure-preview-box">
-          <div class="brochure-icon-big"><i class="fa-solid fa-file-pdf"></i></div>
-          <div class="brochure-info-text">
-            <h4>Guide d'Excellence Germany Connect Institute (PDF)</h4>
-            <p>Retrouvez le calendrier des sessions 2026, le programme détaillé des cours A1 à C1, les modalités de l'Auto-École GCONNECT et le guide des démarches pour l'Allemagne.</p>
-          </div>
+      <form class="form" id="brochureForm">
+        <div class="field">
+          <label for="brochureName">Votre nom</label>
+          <input type="text" id="brochureName" autocomplete="name" placeholder="Ex. Kamga Patrick" required>
         </div>
-
-        <form class="brochure-download-form" id="brochureForm">
-          <div class="form-field">
-            <label for="brochureName">Votre Nom</label>
-            <input type="text" id="brochureName" placeholder="Ex: Kamga Patrick" required>
-          </div>
-          <div class="form-field">
-            <label for="brochureWhatsapp">Votre Numéro WhatsApp</label>
-            <input type="tel" id="brochureWhatsapp" placeholder="Ex: +237 696 00 00 00" required>
-          </div>
-          <button type="submit" class="btn-magnetic btn-brand-gold w-full">
-            <span class="btn-inner-text"><i class="fa-solid fa-download"></i> Recevoir la Brochure Immédiatement</span>
-          </button>
-        </form>
-      </div>
+        <div class="field">
+          <label for="brochureWhatsapp">Votre numéro WhatsApp</label>
+          <input type="tel" id="brochureWhatsapp" autocomplete="tel" inputmode="tel" placeholder="Ex. +237 696 00 00 00" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block btn-lg"><i class="fa-solid fa-download" aria-hidden="true"></i> Recevoir la brochure</button>
+      </form>
     </div>
   </div>
 
-  <!-- Modal 3 : Conditions Générales d'Utilisation (CGU / CGV) -->
-  <div class="modal-backdrop" id="cguModal" aria-hidden="true" role="dialog" aria-labelledby="cguModalTitle">
-    <div class="modal-dialog-panel modal-legal-panel">
-      <div class="modal-header">
-        <div class="modal-title-wrap">
-          <span class="modal-badge-tag">DOCUMENTS JURIDIQUES</span>
-          <h3 class="modal-main-title" id="cguModalTitle">Conditions Générales d'Utilisation &amp; de Vente</h3>
-        </div>
-        <button type="button" class="modal-close-btn" data-close-modal aria-label="Fermer la modal">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
+  <div class="modal" id="cguModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="cguModalTitle">
+    <div class="modal-panel modal-lg">
+      <div class="modal-head">
+        <h2 class="modal-title" id="cguModalTitle">Conditions générales d'utilisation et de vente</h2>
+        <button type="button" class="icon-btn" data-close-modal aria-label="Fermer"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
       </div>
-
-      <div class="modal-legal-content">
-        <h4>1. Objet &amp; Identification de l'Institut</h4>
+      <div class="legal">
+        <h3>1. Objet et identification de l'institut</h3>
         <p>Les présentes conditions régissent l'accès aux services pédagogiques, linguistiques et d'auto-école dispensés par GERMANY CONNECT INSTITUTE, situé au Carrefour Ngousso, Yaoundé, Cameroun.</p>
-
-        <h4>2. Inscriptions &amp; Modalités de Paiement</h4>
+        <h3>2. Inscriptions et modalités de paiement</h3>
         <p>L'inscription à une session de langue ou à l'Auto-École GCONNECT est réputée ferme après versement de l'acompte prévu au secrétariat. Des facilités de paiement échelonné sont convenues d'accord parties.</p>
-
-        <h4>3. Assiduité &amp; Examens Officiels</h4>
+        <h3>3. Assiduité et examens officiels</h3>
         <p>L'apprenant s'engage à respecter le règlement intérieur du campus, à suivre les heures obligatoires d'entraînement sur ordinateurs et à participer aux examens blancs préparatoires aux certifications Goethe, TELC et ÖSD.</p>
-
-        <h4>4. Passerelle Allemagne &amp; Visas</h4>
+        <h3>4. Passerelle Allemagne et visas</h3>
         <p>Germany Connect Institute apporte un conseil rigoureux et un encadrement administratif pour les candidatures et dossiers de visa. La décision d'octroi de visa relève souverainement de l'Ambassade d'Allemagne compétente.</p>
       </div>
     </div>
   </div>
 
-  <!-- Modal 4 : Politique de Confidentialité & Protection des Données -->
-  <div class="modal-backdrop" id="privacyModal" aria-hidden="true" role="dialog" aria-labelledby="privacyModalTitle">
-    <div class="modal-dialog-panel modal-legal-panel">
-      <div class="modal-header">
-        <div class="modal-title-wrap">
-          <span class="modal-badge-tag">RGPD &amp; PROTECTION DES DONNÉES</span>
-          <h3 class="modal-main-title" id="privacyModalTitle">Politique de Confidentialité</h3>
-        </div>
-        <button type="button" class="modal-close-btn" data-close-modal aria-label="Fermer la modal">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
+  <div class="modal" id="privacyModal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="privacyModalTitle">
+    <div class="modal-panel modal-lg">
+      <div class="modal-head">
+        <h2 class="modal-title" id="privacyModalTitle">Politique de confidentialité</h2>
+        <button type="button" class="icon-btn" data-close-modal aria-label="Fermer"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
       </div>
-
-      <div class="modal-legal-content">
-        <h4>1. Collecte des Données Personnelles</h4>
+      <div class="legal">
+        <h3>1. Collecte des données personnelles</h3>
         <p>Les informations collectées lors des formulaires d'inscription ou du test de niveau (nom, prénom, numéro WhatsApp, niveau de langue) ont pour seule finalité le traitement administratif et l'orientation pédagogique.</p>
-
-        <h4>2. Non-Divulgation à des Tiers</h4>
+        <h3>2. Non-divulgation à des tiers</h3>
         <p>Germany Connect Institute ne vend, ne loue et ne cède aucune donnée personnelle à des fins commerciales à des tiers extérieurs.</p>
-
-        <h4>3. Vos Droits</h4>
+        <h3>3. Vos droits</h3>
         <p>Vous disposez à tout moment d'un droit d'accès, de rectification ou de suppression de vos données sur simple demande auprès de notre secrétariat au +237 696 005 112 ou par message WhatsApp officiel.</p>
       </div>
     </div>
   </div>
 
-  <!-- Scripts JavaScript GSAP 3 & Moteur Interactif -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="app.js?v=6.0"></script>
+  <script src="app.js?v=8.1"></script>
 </body>
 </html>

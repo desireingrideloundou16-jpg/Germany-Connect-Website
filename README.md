@@ -51,4 +51,4 @@ Germany Connect Institute est un centre d'excellence linguistique et de prépara
 
 - **Adresse** : Yaoundé, Quartier Ngousso (en face de l'Hôpital Général), Cameroun
 - **Téléphone / WhatsApp** : +237 697 59 13 47 / +237 671 43 00 28
-- **Email** : contact@germany-connect.com
+- **Email** : germanyconnectinstitut@gmail.com
